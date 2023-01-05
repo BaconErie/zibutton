@@ -5,9 +5,24 @@
     </head>
 
     <body>
+        <div id="create-list-div">
+            <input id="character-input" type="text" placeholder="Enter a character">
+            <button id="enter-character">Enter</button>
 
-        <div id="core-div">
+            <ul id="character-list-display">
+
+            </ul>
+            <br>
+            <button id="begin-quiz">Start Quiz</button>
+        </div>
+
+        <div id="core-div" style="display:none">
+            <input id="show-char" type="checkbox">
+            <label for="show-char">Show outline</label>
+
             <div id="character-display"></div>
+
+            <div id="buttons"></div>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.2/dist/hanzi-writer.min.js"></script>
