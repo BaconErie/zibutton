@@ -184,6 +184,12 @@ charInput.addEventListener('keyup', e => {
         addCharacter(e);
     }});
 
-beginQuizButton.addEventListener('click', nextChar);
+beginQuizButton.addEventListener('click', e => {
+    if (charList.length > 0) {
+        nextChar(e);
+    } else {
+        alert('You need to add some characters to the list!')
+    }
+});
 
 outlineCheckbox.addEventListener('click', checkboxChanged);
