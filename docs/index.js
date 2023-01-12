@@ -15,6 +15,43 @@ let beginQuizButton = document.getElementById('begin-quiz');
 
 let outlineCheckbox = document.getElementById('show-char');
 
+let listUploadInput = document.getElementById('list-import');
+let listExportButton = document.getElementById('list-export');
+
+/***************
+HELPER FUNCTIONS
+***************/
+
+function sanitize(string) {
+    const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#x27;',
+        "/": '&#x2F;',
+    };
+    const reg = /[&<>"'/]/ig;
+    return string.replace(reg, (match)=>(map[match]));
+}
+
+function shuffle(array) {
+    let currentIndex = array.length,  randomIndex;
+
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+        // Pick a remaining element.
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+
+    return array;
+}
+
 /****
 CORE
 ****/
@@ -66,24 +103,6 @@ async function loadCore(char){
     }
 }
 
-function shuffle(array) {
-    let currentIndex = array.length,  randomIndex;
-  
-    // While there remain elements to shuffle.
-    while (currentIndex != 0) {
-  
-      // Pick a remaining element.
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-  
-      // And swap it with the current element.
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]];
-    }
-  
-    return array;
-  }
-
 function strokeButtonClicked(event) {
     let button = event.currentTarget
     let strokeNum = button.id;
@@ -103,6 +122,17 @@ function strokeButtonClicked(event) {
         }
     } else {
         alert('Wrong stroke!');
+    }
+}
+
+async function validateCharacter(char) {
+    // Make sure the character exists
+    response = await fetch(`https://cdn.jsdelivr.net/npm/hanzi-writer-data@2.0/${char}.json`);
+
+    if (response.status == 200) {
+        return true;
+    } else {
+        return false;
     }
 }
 
@@ -177,6 +207,45 @@ function checkboxChanged(event) {
     
 }
 
+/***************************
+LIST IMPORTING AND EXPORTING
+***************************/
+
+async function importList() {
+    const reader = new FileReader();
+    const listFile = this.files[0];
+
+    reader.addEventListener('load', (event) => {
+        const listRaw = sanitize(event.target.result);
+        const inputCharArray = listRaw.split('\n');
+
+        for (const char of inputCharArray) {
+            validateCharacter(char).then(charExists => {
+                if (charExists) {
+                    charList.push(char);
+
+                    let listItem = document.createElement('li');
+                    listItem.innerHTML = char + ' ';
+                    listItem.className = char;
+                    let removeButton = document.createElement('button');
+                    removeButton.addEventListener('click', deleteButtonHandler);
+                    removeButton.innerHTML = 'Remove';
+                    removeButton.className = char;
+                    listItem.appendChild(removeButton);
+                    
+                    charListDisplay.appendChild(listItem);
+                }
+            });
+        }
+    });
+
+    reader.readAsText(listFile);
+}
+
+/****************
+EVENT CONNECTIONS
+****************/
+
 charInputButton.addEventListener('click', addCharacter);
 
 charInput.addEventListener('keyup', e => {
@@ -187,3 +256,5 @@ charInput.addEventListener('keyup', e => {
 beginQuizButton.addEventListener('click', nextChar);
 
 outlineCheckbox.addEventListener('click', checkboxChanged);
+
+listUploadInput.addEventListener('change', importList)
