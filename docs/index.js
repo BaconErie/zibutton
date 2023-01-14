@@ -52,6 +52,19 @@ function shuffle(array) {
     return array;
 }
 
+function download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+}
+
 /****
 CORE
 ****/
@@ -242,6 +255,21 @@ async function importList() {
     reader.readAsText(listFile);
 }
 
+function exportList() {
+    if (charList.length == 0) {
+        alert('There\'s nothing to download...');
+        return;
+    }
+
+    let fileString = '';
+
+    charList.forEach(char => {
+        fileString += char + '\n'
+    })
+
+    download('character-list.txt', fileString);
+}
+
 /****************
 EVENT CONNECTIONS
 ****************/
@@ -257,4 +285,5 @@ beginQuizButton.addEventListener('click', nextChar);
 
 outlineCheckbox.addEventListener('click', checkboxChanged);
 
-listUploadInput.addEventListener('change', importList)
+listUploadInput.addEventListener('change', importList);
+listExportButton.addEventListener('click', exportList);
