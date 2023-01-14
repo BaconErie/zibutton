@@ -16,6 +16,7 @@ let beginQuizButton = document.getElementById('begin-quiz');
 let outlineCheckbox = document.getElementById('show-char');
 
 let listUploadInput = document.getElementById('list-import');
+let listImportButton = document.getElementById('list-import-button'); // The actual thing that the user has to click
 let listExportButton = document.getElementById('list-export');
 
 /***************
@@ -226,15 +227,16 @@ LIST IMPORTING AND EXPORTING
 
 async function importList() {
     const reader = new FileReader();
-    const listFile = this.files[0];
+    const listFile = listUploadInput.files[0];
 
     reader.addEventListener('load', (event) => {
         const listRaw = sanitize(event.target.result);
         const inputCharArray = listRaw.split('\n');
 
-        for (const char of inputCharArray) {
+        for (const charRaw of inputCharArray) {
+            const char = charRaw.trim()
             validateCharacter(char).then(charExists => {
-                if (charExists) {
+                if (charExists && !charList.includes(char)) {
                     charList.push(char);
 
                     let listItem = document.createElement('li');
@@ -291,5 +293,5 @@ beginQuizButton.addEventListener('click', e => {
 
 outlineCheckbox.addEventListener('click', checkboxChanged);
 
-listUploadInput.addEventListener('change', importList);
+listImportButton.addEventListener('click', importList);
 listExportButton.addEventListener('click', exportList);
