@@ -130,7 +130,7 @@ function strokeButtonClicked(event) {
             if (currentCharIndex >= charList.length) {
                 alert('You did everything right!');
             } else {
-                alert('You did everythign right! Loading next question.');
+                alert('You did everything right! Loading next question.');
                 nextChar();
             }
         }
