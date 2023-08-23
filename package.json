@@ -1,0 +1,28 @@
+{
+  "name": "stroke-order-quizzer",
+  "version": "1.0.0",
+  "description": "Quizzes you on stroke order of Chinese characters",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "build": "webpack"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.22.10",
+    "@babel/preset-react": "^7.22.5",
+    "babel-loader": "^9.1.3",
+    "style-loader": "^3.3.3",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
