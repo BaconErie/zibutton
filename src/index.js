@@ -2,7 +2,9 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 
 export default function MainComponent() {
-    /* INSERT CODE.......... */
+  return (<>
+    
+  </>) 
 }
 
 const domNode = document.getElementById('app');
