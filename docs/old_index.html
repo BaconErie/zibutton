@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+
+    <body>
+        <div id="create-list-div">
+            <input id="character-input" type="text" placeholder="Enter a character">
+            <button id="enter-character">Enter</button>
+
+            <br><br>
+            <label for="list-import">You can also import a list:</label>
+            <br>
+            <input type="file" id="list-import" accept=".txt">
+            <button id="list-import-button">Import List</button>
+            <br><br>
+            <button id="list-export">Export list</button>
+            <br><br>
+            <button id="begin-quiz">Start Quiz</button>
+
+            <ul id="character-list-display">
+
+            </ul>
+            <br>
+            
+        </div>
+
+        <div id="core-div" style="display:none">
+            <input id="show-char" type="checkbox">
+            <label for="show-char">Show outline</label>
+
+            <div id="character-display"></div>
+
+            <div id="buttons"></div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.2/dist/hanzi-writer.min.js"></script>
+        <script src="index.js"></script>
+    </body>
+</html>
