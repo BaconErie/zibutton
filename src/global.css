@@ -20,6 +20,7 @@
 
 h1 {
     margin: 0px;
+    padding: 0px;
 }
 
 h2 {
@@ -69,6 +70,39 @@ input {
 input:focus {
     border-color: rgba(var(--primary-color), 1);
     outline: none;
+}
+
+ul {
+    display: flex;
+    flex-direction: column;
+
+    padding: 0px;
+    border-radius: 10px;
+    background-color: #272727;
+
+    box-sizing: border-box;
+    box-shadow: none;
+    border: solid;
+    border-width: 1px;
+    border-color: #999999;
+
+    color: #ffffff;
+
+    overflow: scroll;
+}
+
+li {
+    margin: 0px;
+    box-shadow: none;
+    border-radius: 10px 10px 0px 0px;
+
+    border: none;
+    border-bottom: 1px solid;
+    border-color: #999999;
+    
+    text-align: left;
+
+    padding: 0.5rem;
 }
 
 .wrapper {

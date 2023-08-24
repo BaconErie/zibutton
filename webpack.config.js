@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
     entry: {
-        index: './index.js',
+        index: './src/index.js',
     },
 
     output: {
