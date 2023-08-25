@@ -75,6 +75,7 @@ export default function MainComponent() {
           <PrimaryButton onClick={handleAddCharacter} disabled={disableAddChar}>Add a character</PrimaryButton>
           <SurfaceButton>Import list</SurfaceButton>
           <SurfaceButton>Export list</SurfaceButton>
+          <SurfaceButton>Clear all</SurfaceButton>
         </span>
       </div>
 
