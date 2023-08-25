@@ -62,6 +62,14 @@ export default function MainComponent() {
     }
   }
 
+  function handleClearList() {
+    if (characterList.length == 0) return;
+
+    if (confirm('Are you sure you want to delete everything in the list?')) {
+      setCharacterList([]);
+    }
+  }
+
   const characterListItems = characterList.map(character => <CharacterDisplay key={character} character={character} characterList={characterList} setCharacterList={setCharacterList} />);
 
   return (<>
@@ -75,7 +83,7 @@ export default function MainComponent() {
           <PrimaryButton onClick={handleAddCharacter} disabled={disableAddChar}>Add a character</PrimaryButton>
           <SurfaceButton>Import list</SurfaceButton>
           <SurfaceButton>Export list</SurfaceButton>
-          <SurfaceButton>Clear all</SurfaceButton>
+          <SurfaceButton onClick={handleClearList}>Clear all</SurfaceButton>
         </span>
       </div>
 
