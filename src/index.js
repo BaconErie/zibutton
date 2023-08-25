@@ -34,6 +34,19 @@ export default function MainComponent() {
     }
   }
 
+  function download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+  }
+
   async function handleAddCharacter() {
     setDisableAddChar(true);
 
@@ -62,6 +75,18 @@ export default function MainComponent() {
     }
   }
 
+  function handleExportList() {
+    if (characterList.length == 0) return;
+
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = (date.getMonth()+1).toString().length==1 ? '0' + (date.getMonth()+1).toString() : (date.getMonth()+1).toString();
+    const day = date.getDate().toString().length==1 ? '0' + date.getDate().toString() : date.getDate().toString();
+
+
+    download(`character-list_${year}-${month}-${day}.txt`, characterList.join('\n'));
+  }
+
   function handleClearList() {
     if (characterList.length == 0) return;
 
@@ -82,7 +107,7 @@ export default function MainComponent() {
         <span>
           <PrimaryButton onClick={handleAddCharacter} disabled={disableAddChar}>Add a character</PrimaryButton>
           <SurfaceButton>Import list</SurfaceButton>
-          <SurfaceButton>Export list</SurfaceButton>
+          <SurfaceButton onClick={handleExportList}>Export list</SurfaceButton>
           <SurfaceButton onClick={handleClearList}>Clear all</SurfaceButton>
         </span>
       </div>
