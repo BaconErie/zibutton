@@ -1,3 +1,22 @@
 .characterList {
     height: 50vh;
 }
+
+.inputBar {
+    display: flex;
+    flex-direction: row;
+    column-gap: 2rem;
+
+    box-shadow: none;
+
+    padding: 0px;
+    margin: 0px;
+}
+
+.inputBar > input {
+    flex-grow: 1;
+}
+
+.red {
+    color: rgb(var(--primary-color));
+}
