@@ -42,6 +42,7 @@ export default function MainComponent() {
     }
 
     setCharacterList(newCharacterList);
+    document.getElementById('characterInput').value = '';
 
     setDisableAddChar(false);
 
