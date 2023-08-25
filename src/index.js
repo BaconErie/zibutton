@@ -6,6 +6,17 @@ import './global.css';
 import styles from './Index.module.css';
 
 import PrimaryButton from './components/baconerie/PrimaryButton/PrimaryButton';
+import SurfaceButton from './components/baconerie/SurfaceButton/SurfaceButton';
+
+function CharacterDisplay({ character, characterList, setCharacterList }) {
+  function handleDeleteCharacter() {
+    let newCharacterList = [...characterList];
+    newCharacterList.splice(newCharacterList.indexOf(character), 1);
+    setCharacterList(newCharacterList);
+  }
+
+  return (<li className={styles.characterDisplay}><SurfaceButton onClick={handleDeleteCharacter}>x</SurfaceButton> {character}</li>)
+}
 
 export default function MainComponent() {
   const [ characterList, setCharacterList ] = useState([]);
@@ -51,7 +62,7 @@ export default function MainComponent() {
     }
   }
 
-  const characterListItems = characterList.map(character => <li key={character}>{character}</li>);
+  const characterListItems = characterList.map(character => <CharacterDisplay key={character} character={character} characterList={characterList} setCharacterList={setCharacterList} />);
 
   return (<>
     <div><h1><span className={styles.red}>字</span>Button</h1></div>
