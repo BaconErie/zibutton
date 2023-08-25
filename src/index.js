@@ -71,7 +71,11 @@ export default function MainComponent() {
       <h1>Create a list</h1>
       <div class={styles.inputBar}>
         <input id="characterInput" type="text" placeholder="Enter a character" onInput={e => setCharInput(e.target.value)} disabled={disableAddChar}/>
-        <PrimaryButton onClick={handleAddCharacter} disabled={disableAddChar}>Add a character</PrimaryButton>
+        <span>
+          <PrimaryButton onClick={handleAddCharacter} disabled={disableAddChar}>Add a character</PrimaryButton>
+          <SurfaceButton>Import list</SurfaceButton>
+          <SurfaceButton>Export list</SurfaceButton>
+        </span>
       </div>
 
       <ul className={styles.characterList}>
