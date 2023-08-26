@@ -9,6 +9,10 @@ main {
     text-align: center;
 }
 
+.definition > b {
+    text-decoration: underline;
+}
+
 .characterDisplay {
     flex-grow: 1;
 }
