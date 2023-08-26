@@ -1,0 +1,18 @@
+main {
+    height: 100vh;
+    margin: -8px;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.definition {
+    text-align: center;
+}
+
+.characterDisplay {
+    flex-grow: 1;
+}
+
+.characterDisplayDiv {
+    flex-grow: 1;
+}
