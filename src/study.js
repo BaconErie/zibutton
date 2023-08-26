@@ -8,6 +8,28 @@ import './global.css';
 import indexStyles from './Index.module.css';
 import styles from './Study.module.css';
 
+import SurfaceButton from './components/baconerie/SurfaceButton/SurfaceButton';
+
+
+
+function StrokeButton({ strokeId, currentCharacter }) {
+  useEffect(() => {
+    let buttonWriter = HanziWriter.create(document.getElementById('id'), currentCharacter, {
+      width: 50,
+      height: 50,
+      padding: 2.5,
+      showCharacter: false,
+      showOutline: false
+    })
+    
+    buttonWriter.animateStroke(strokeId);
+  }, [])
+
+  return (<>
+    <SurfaceButton id={strokeId}></SurfaceButton>
+  </>)
+}
+
 export default function StudyPage() {
   /*
     ON PAGE LOAD
@@ -144,7 +166,7 @@ export default function StudyPage() {
     </div>
 
     <div>
-      yo wsg whats up gamers
+      {displayedStrokeIds.map(id => <StrokeButton id={id} currentCharacter={currentCharacter}/>)}
     </div>
   </>)
 }
