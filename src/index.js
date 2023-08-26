@@ -18,7 +18,7 @@ function CharacterDisplay({ character, characterList, setCharacterList }) {
   return (<li className={styles.characterDisplay}><SurfaceButton onClick={handleDeleteCharacter}>x</SurfaceButton> {character}</li>)
 }
 
-export default function MainComponent() {
+export default function IndexPage() {
   const [ characterList, setCharacterList ] = useState([]);
   const [ charInput , setCharInput ] = useState('');
   const [ disableAddChar , setDisableAddChar ] = useState(false);
@@ -198,4 +198,4 @@ export default function MainComponent() {
 
 const domNode = document.getElementById('app');
 const root = createRoot(domNode);
-root.render(<MainComponent />); 
+root.render(<IndexPage />); 
