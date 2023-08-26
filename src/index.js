@@ -48,27 +48,32 @@ export default function MainComponent() {
   }
 
   async function upload() {
-    var input = document.createElement('input');
-    input.type = 'file';
+    const promise = new Promise((resolve, _) => {
 
-    input.onchange = e => { 
+        let input = document.createElement('input');
+        input.type = 'file';
 
-      // getting a hold of the file reference
-      var file = e.target.files[0]; 
+        input.onchange = e => { 
 
-      // setting up the reader
-      var reader = new FileReader();
-      reader.readAsText(file,'UTF-8');
+            // getting a hold of the file reference
+            let file = e.target.files[0]; 
 
-      // here we tell the reader what to do when it's done reading...
-      reader.onload = readerEvent => {
-          var content = readerEvent.target.result; // this is the content!
-          console.log( content );
-      }
+            // setting up the reader
+            let reader = new FileReader();
+            reader.readAsText(file,'UTF-8');
 
-    }
+            // here we tell the reader what to do when it's done reading...
+            reader.onload = readerEvent => {
+                let content = readerEvent.target.result; // this is the content!
+                resolve(content);
+            }
 
-    input.click();
+        }
+
+        input.click();
+    })
+
+    return promise;
   } 
 
   async function handleAddCharacter() {
@@ -91,6 +96,35 @@ export default function MainComponent() {
 
     setCharacterList(newCharacterList);
     document.getElementById('characterInput').value = '';
+
+    setDisableAddChar(false);
+
+    if (notFoundCharacters.length > 0) {
+      alert('The following characters were not found: ' + notFoundCharacters.join(', '));
+    }
+  }
+
+  async function handleImportList() {
+    setDisableAddChar(true);
+
+    const fileContent = await upload();
+    let charactersToAdd = fileContent.split('\n');
+    charactersToAdd = charactersToAdd.map(char => char.trim());
+    let newCharacterList = [...characterList];
+    let notFoundCharacters = [];
+    
+    for (const char of charactersToAdd) {
+      if (char == '' || char == ' ' || newCharacterList.includes(char)) continue;
+      
+      if (!(await validateCharacter(char))) {
+        notFoundCharacters.push(char);
+        continue;
+      }
+
+      newCharacterList.push(char);
+    }
+
+    setCharacterList(newCharacterList);
 
     setDisableAddChar(false);
 
@@ -130,7 +164,7 @@ export default function MainComponent() {
         <input id="characterInput" type="text" placeholder="Enter a character" onInput={e => setCharInput(e.target.value)} disabled={disableAddChar}/>
         <span>
           <PrimaryButton onClick={handleAddCharacter} disabled={disableAddChar}>Add a character</PrimaryButton>
-          <SurfaceButton>Import list</SurfaceButton>
+          <SurfaceButton onClick={handleImportList}>Import list</SurfaceButton>
           <SurfaceButton onClick={handleExportList}>Export list</SurfaceButton>
           <SurfaceButton onClick={handleClearList}>Clear all</SurfaceButton>
         </span>
