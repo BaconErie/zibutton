@@ -115,8 +115,6 @@ export default function IndexPage() {
   }
 
   async function handleImportList() {
-    setDisableAddChar(true);
-
     const fileContent = await upload();
     let charactersToAdd = fileContent.split('\n');
     charactersToAdd = charactersToAdd.map(char => char.trim());
@@ -135,8 +133,6 @@ export default function IndexPage() {
     }
 
     setCharacterList(newCharacterList);
-
-    setDisableAddChar(false);
 
     if (notFoundCharacters.length > 0) {
       alert('The following characters were not found: ' + notFoundCharacters.join(', '));
