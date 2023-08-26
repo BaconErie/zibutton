@@ -76,6 +76,7 @@ input:focus {
 ul {
     display: flex;
     flex-direction: column;
+    flex-wrap: nowrap;
 
     padding: 0px;
     border-radius: 10px;
