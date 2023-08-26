@@ -190,6 +190,8 @@ export default function MainComponent() {
       <ul className={styles.characterList}>
         {characterListItems}
       </ul>
+
+      <PrimaryButton onClick={() => window.location.assign('study.html')}>Start Quiz</PrimaryButton>
     </div>
   </>) 
 }
