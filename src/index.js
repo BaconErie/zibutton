@@ -170,6 +170,13 @@ export default function MainComponent() {
 
     <div>
       <h1>Create a list</h1>
+      <p>
+        Add some characters, then click the "Start Quiz" button at the bottom.
+      </p>
+      <p>
+        Characters are saved to your browser, but may disappear on its own. Export and save your list to keep it safe.
+      </p>
+
       <div class={styles.inputBar}>
         <input id="characterInput" type="text" placeholder="Enter a character" onInput={e => setCharInput(e.target.value)} disabled={disableAddChar}/>
         <span>

@@ -32,6 +32,10 @@ body {
     background-color: #121212;
 }
 
+p {
+    margin: 0px;
+}
+
 main {
     display: flex;
     flex-direction: column;
