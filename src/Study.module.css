@@ -3,6 +3,8 @@ main {
     margin: -8px;
     padding: 8px;
     box-sizing: border-box;
+
+    flex-wrap: nowrap;
 }
 
 .definition {
@@ -13,10 +15,27 @@ main {
     text-decoration: underline;
 }
 
-.characterDisplay {
+#characterDisplay {
+    display: flex;
     flex-grow: 1;
+    
+    justify-content: center;
+    align-items: center;
+
+    padding: 0px;
 }
 
 .characterDisplayDiv {
-    flex-grow: 1;
+    height: 100%;
+}
+
+.buttonBar {
+    flex-direction: row;
+    justify-content: center;
+    column-gap: 0.5rem;
+    min-height: 82px;
+}
+
+.strokeButton {
+    aspect-ratio: 1;
 }

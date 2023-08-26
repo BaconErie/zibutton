@@ -1,3 +1,5 @@
+console.warn('yo check for characeters that like have little strokes')
+
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { useState, useEffect } from 'react';
@@ -14,19 +16,20 @@ import SurfaceButton from './components/baconerie/SurfaceButton/SurfaceButton';
 
 function StrokeButton({ strokeId, currentCharacter }) {
   useEffect(() => {
-    let buttonWriter = HanziWriter.create(document.getElementById('id'), currentCharacter, {
-      width: 50,
-      height: 50,
-      padding: 2.5,
+    let buttonWriter = HanziWriter.create(document.getElementById(strokeId), currentCharacter, {
+      width: 20,
+      height: 20,
+      padding: 0,
       showCharacter: false,
-      showOutline: false
+      showOutline: false,
+      strokeColor: '#ffffff'
     })
     
     buttonWriter.animateStroke(strokeId);
   }, [])
 
   return (<>
-    <SurfaceButton id={strokeId}></SurfaceButton>
+    <SurfaceButton id={strokeId} className={styles.strokeButton}></SurfaceButton>
   </>)
 }
 
@@ -71,6 +74,7 @@ export default function StudyPage() {
   const [ displayedStrokeIds, setDisplayedStrokeIds ] = useState([]);
   const [ finalStroke, setFinalStroke ] = useState(0);
   const [ characterInfo, setCharacterInfo ] = useState(null);
+  const [ mainCharacterWriter, setMainCharacterWriter ] = useState(null);
 
   useEffect(() => {
     if (localStorage.getItem('characterList') != null && localStorage.getItem('characterList') != '') {
@@ -150,6 +154,19 @@ export default function StudyPage() {
     setStrokeIdList(newStrokeIdList);
     setDisplayedStrokeIds(newDisplayedStrokeIds);
     setFinalStroke(numOfStrokes-1);
+
+    const characterDisplay = document.getElementById(styles.characterDisplay);
+    let sizeToUse = characterDisplay.clientHeight < characterDisplay.clientWidth ? characterDisplay.clientHeight : characterDisplay.clientWidth;
+    let newMainCharacterWriter = HanziWriter.create(document.getElementById(styles.characterDisplay), newCharacter, {
+      width: sizeToUse-25,
+      height: sizeToUse-25,
+      padding: 16,
+      showCharacter: false,
+      showOutline: false,
+      strokeColor: '#ffffff'
+    })
+
+    setMainCharacterWriter(newMainCharacterWriter)
   }
 
   return (<>
@@ -160,13 +177,13 @@ export default function StudyPage() {
       <p>Click the button that shows the next character stroke.</p>
 
       <p class={styles.definition}><b>Definition</b>: {currentDef}, <b>Pinyin</b>: {currentPinyin}</p>
-      <div class={`${styles.characterDisplay} surfaceDiv`}>
-        beeg div
+
+      <div id={styles.characterDisplay} className={'surfaceDiv'}>
       </div>
     </div>
 
-    <div>
-      {displayedStrokeIds.map(id => <StrokeButton id={id} currentCharacter={currentCharacter}/>)}
+    <div className={styles.buttonBar}>
+      {displayedStrokeIds.map(id => <StrokeButton strokeId={id} currentCharacter={currentCharacter}/>)}
     </div>
   </>)
 }
