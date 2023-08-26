@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import './global.css';
 import styles from './Index.module.css';
@@ -22,6 +22,16 @@ export default function MainComponent() {
   const [ characterList, setCharacterList ] = useState([]);
   const [ charInput , setCharInput ] = useState('');
   const [ disableAddChar , setDisableAddChar ] = useState(false);
+
+  useEffect( () => {
+    if (localStorage.getItem('characterList') != null && localStorage.getItem('characterList') != '') {
+      setCharacterList(localStorage.getItem('characterList').split(','))
+    }
+  }, []);
+
+  useEffect( () => {
+    localStorage.setItem('characterList', characterList);
+  }, [characterList]);
 
   async function validateCharacter(char) {
     // Make sure the character exists
@@ -74,7 +84,7 @@ export default function MainComponent() {
     })
 
     return promise;
-  } 
+  }
 
   async function handleAddCharacter() {
     setDisableAddChar(true);
