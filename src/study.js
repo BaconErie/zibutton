@@ -1,5 +1,3 @@
-console.warn('yo check for characeters that like have little strokes')
-
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { useState, useEffect } from 'react';
@@ -137,13 +135,18 @@ export default function StudyPage() {
     }
 
     newStrokeIdList.splice(newStrokeIdList.indexOf(0), 1);
-    let newDisplayedStrokeIds = [0];    
-    for(let i=0;i<3;i++) {
-      if (newStrokeIdList.length == 0) break;
+    let newDisplayedStrokeIds = [0];
+    if (newStrokeIdList <= 3) {
+      newDisplayedStrokeIds = newDisplayedStrokeIds.concat(strokeIdList);
+      strokeIdList = [];
+    } else {
+      for(let i=0;i<3;i++) {
+        if (newStrokeIdList.length == 0) break;
 
-      let index = Math.floor(Math.random() * newStrokeIdList.length);
-      newDisplayedStrokeIds.push(newStrokeIdList[index]);
-      newStrokeIdList.splice(index, 1);
+        let index = Math.floor(Math.random() * newStrokeIdList.length);
+        newDisplayedStrokeIds.push(newStrokeIdList[index]);
+        newStrokeIdList.splice(index, 1);
+      }
     }
 
     setCorrectStroke(0);
