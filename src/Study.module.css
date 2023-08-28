@@ -38,4 +38,14 @@ main {
 
 .strokeButton {
     aspect-ratio: 1;
+
+    background-image: url('grid.svg');
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    padding: 0px;
+}
+
+.strokeButton:hover {
+    background-image: url('grid-red.svg');
 }

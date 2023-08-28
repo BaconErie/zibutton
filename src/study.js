@@ -17,8 +17,8 @@ import SurfaceButton from './components/baconerie/SurfaceButton/SurfaceButton';
 function StrokeButton({ strokeId, currentCharacter }) {
   useEffect(() => {
     let buttonWriter = HanziWriter.create(document.getElementById(strokeId), currentCharacter, {
-      width: 20,
-      height: 20,
+      width: 30,
+      height: 30,
       padding: 0,
       showCharacter: false,
       showOutline: false,
