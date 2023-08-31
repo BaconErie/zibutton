@@ -30,10 +30,31 @@ main {
 }
 
 .buttonBar {
+    display: block;
+    padding: 0px;
+}
+
+.buttonWrapper {
+    display: flex;
+
     flex-direction: row;
     justify-content: center;
     column-gap: 0.5rem;
     min-height: 82px;
+    position: relative;
+    overflow: hidden;
+}
+
+.characterComplete {
+    height: 100%;
+    width: 100%;
+
+    background-color: #2bbd55;
+    position: absolute;
+    left: 0px;
+    bottom: 100%;
+
+    transition-duration: 0.5s;
 }
 
 .strokeButton {

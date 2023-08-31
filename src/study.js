@@ -12,7 +12,7 @@ import SurfaceButton from './components/baconerie/SurfaceButton/SurfaceButton';
 
 
 
-function StrokeButton({ strokeId, currentCharacter }) {
+function StrokeButton({ strokeId, currentCharacter, setSelectedStrokeId }) {
   useEffect(() => {
     let buttonWriter = HanziWriter.create(document.getElementById(strokeId), currentCharacter, {
       width: 30,
@@ -26,8 +26,12 @@ function StrokeButton({ strokeId, currentCharacter }) {
     buttonWriter.animateStroke(strokeId);
   }, [])
 
+  function handleButtonClick() {
+    setSelectedStrokeId(strokeId);    
+  }
+
   return (<>
-    <SurfaceButton id={strokeId} className={styles.strokeButton}></SurfaceButton>
+    <SurfaceButton id={strokeId} className={styles.strokeButton} onClick={handleButtonClick}></SurfaceButton>
   </>)
 }
 
@@ -73,6 +77,9 @@ export default function StudyPage() {
   const [ finalStroke, setFinalStroke ] = useState(0);
   const [ characterInfo, setCharacterInfo ] = useState(null);
   const [ mainCharacterWriter, setMainCharacterWriter ] = useState(null);
+  const [ selectedStrokeId, setSelectedStrokeId ] = useState(null);
+  const [ isCharacterCompleteShown, setIsCharacterCompleteShown ] = useState(false);
+  const [ isCorrectStrokeShown, setIsCorrectStrokeShown ] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem('characterList') != null && localStorage.getItem('characterList') != '') {
@@ -87,6 +94,39 @@ export default function StudyPage() {
 
     quizNewCharacter();
   }, [characterInfo])
+
+  useEffect(() => {
+    if (selectedStrokeId == null) return; // why cant react just not run this the first time
+    
+    /*
+    ON STROKE BUTTON CLICK
+    ======================
+    1. If stroke id == correct stroke:
+      1. If stroke id == finalStroke:
+        1. Hide all stroke buttons with character complete overlay for 1 second
+        2. Display new character (step 2-9)
+      2. Else:
+        1. Hide all stroke buttons with correct overlay for 0.5 second
+        2. Increase correctStroke by 1
+        2. Repeat 5-9
+    2: Else:
+      1. Hide the button with the incorrect thing for 0.5 second
+      2. Choose a different stroke id
+      3. Replace the clicked button with a new button using the different stroke id
+      */
+
+    if (selectedStrokeId == correctStroke) {
+      if (strokeId == finalStroke) {
+        setIsCharacterCompleteShown(true);
+        setDisplayedStrokeIds([]);
+        setTimeout(quizNewCharacter, 1000);
+      } else {
+        setCorrectStroke(correctStroke => correctStroke + 1);
+        setIsCorrectStrokeShown(true);
+        setTimeout(refreshStrokes, 1000);
+      }
+    }
+  }, [selectedStrokeId])
 
   async function loadCharacterInfo() {
     const response = await fetch('https://raw.githubusercontent.com/skishore/makemeahanzi/master/dictionary.txt');
@@ -157,6 +197,7 @@ export default function StudyPage() {
     setStrokeIdList(newStrokeIdList);
     setDisplayedStrokeIds(newDisplayedStrokeIds);
     setFinalStroke(numOfStrokes-1);
+    setIsCharacterCompleteShown(false);
 
     const characterDisplay = document.getElementById(styles.characterDisplay);
     let sizeToUse = characterDisplay.clientHeight < characterDisplay.clientWidth ? characterDisplay.clientHeight : characterDisplay.clientWidth;
@@ -169,7 +210,11 @@ export default function StudyPage() {
       strokeColor: '#ffffff'
     })
 
-    setMainCharacterWriter(newMainCharacterWriter)
+    setMainCharacterWriter(newMainCharacterWriter);
+  }
+
+  function refreshStrokes() {
+    
   }
 
   return (<>
@@ -186,7 +231,9 @@ export default function StudyPage() {
     </div>
 
     <div className={styles.buttonBar}>
-      {displayedStrokeIds.map(id => <StrokeButton strokeId={id} currentCharacter={currentCharacter}/>)}
+      <div className={styles.characterComplete} style={isCharacterCompleteShown ? 'bottom: 0%;' : 'bottom: 1000%;'}>Character complete!</div>
+
+      <div className={styles.buttonWrapper}>{!isCharacterCompleteShown ? displayedStrokeIds.map(id => <StrokeButton strokeId={id} currentCharacter={currentCharacter} setSelectedStrokeId={setSelectedStrokeId} />) : ''}</div>
     </div>
   </>)
 }
