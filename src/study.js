@@ -123,6 +123,7 @@ export default function StudyPage() {
         setDisplayedStrokeIds([]);
         setTimeout(quizNewCharacter, 1000);
       } else {
+        mainCharacterWriter.animateStroke(correctStroke);
         setCorrectStroke(correctStroke => correctStroke + 1);
         setIsCorrectStrokeShown(true);
         setTimeout(() => {refreshStrokes(); setIsCorrectStrokeShown(false);}, 1000);
