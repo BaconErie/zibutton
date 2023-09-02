@@ -130,6 +130,9 @@ export default function StudyPage() {
         setTimeout(() => {refreshStrokes(); setIsCorrectStrokeShown(false);}, 1000);
         console.log('This is the refreshstrokes runner, correctStrokes is ' + correctStroke + '. Next time you should see ' + (correctStroke+1))
       }
+    } else {
+      setIsIncorrectShown(true);
+      setTimeout(() => {refreshStrokes(); setIsIncorrectShown(false);}, 1000);
     }
   }, [selectedStrokeId])
 
