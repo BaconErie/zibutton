@@ -189,6 +189,8 @@ export default function StudyPage() {
       }
     }
 
+    shuffle(newDisplayedStrokeIds);
+
     setCorrectStroke(0);
     setCharactersToQuiz(newCharactersToQuiz);
     setCurrentCharacter(newCharacter);
