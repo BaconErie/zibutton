@@ -176,7 +176,7 @@ export default function StudyPage() {
 
     newStrokeIdList.splice(newStrokeIdList.indexOf(0), 1);
     let newDisplayedStrokeIds = [0];
-    if (newStrokeIdList <= 3) {
+    if (newStrokeIdList.length <= 3) {
       newDisplayedStrokeIds = newDisplayedStrokeIds.concat(strokeIdList);
       strokeIdList = [];
     } else {
