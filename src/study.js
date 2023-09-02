@@ -15,8 +15,8 @@ import SurfaceButton from './components/baconerie/SurfaceButton/SurfaceButton';
 function StrokeButton({ strokeId, currentCharacter, setSelectedStrokeId }) {
   useEffect(() => {
     let buttonWriter = HanziWriter.create(document.getElementById(strokeId), currentCharacter, {
-      width: 30,
-      height: 30,
+      width: 50,
+      height: 50,
       padding: 0,
       showCharacter: false,
       showOutline: false,
@@ -119,7 +119,7 @@ export default function StudyPage() {
       */
 
     if (selectedStrokeId == correctStroke) {
-      if (strokeId == finalStroke) {
+      if (selectedStrokeId == finalStroke) {
         setIsCharacterCompleteShown(true);
         setDisplayedStrokeIds([]);
         setTimeout(quizNewCharacter, 1000);
@@ -186,7 +186,7 @@ export default function StudyPage() {
     let newDisplayedStrokeIds = [0];
     if (newStrokeIdList.length <= 3) {
       newDisplayedStrokeIds = newDisplayedStrokeIds.concat(strokeIdList);
-      strokeIdList = [];
+      newStrokeIdList = [];
     } else {
       for(let i=0;i<3;i++) {
         if (newStrokeIdList.length == 0) break;
@@ -209,12 +209,12 @@ export default function StudyPage() {
     setFinalStroke(numOfStrokes-1);
     setIsCharacterCompleteShown(false);
 
-    const characterDisplay = document.getElementById(styles.characterDisplay);
+    const characterDisplay = document.getElementsByClassName(styles.mainCharacterDisplay)[0];
     let sizeToUse = characterDisplay.clientHeight < characterDisplay.clientWidth ? characterDisplay.clientHeight : characterDisplay.clientWidth;
-    let newMainCharacterWriter = HanziWriter.create(document.getElementById(styles.characterDisplay), newCharacter, {
+    let newMainCharacterWriter = HanziWriter.create(document.getElementsByClassName(styles.mainCharacterDisplay)[0], newCharacter, {
       width: sizeToUse-25,
       height: sizeToUse-25,
-      padding: 16,
+      padding: 0,
       showCharacter: false,
       showOutline: false,
       strokeColor: '#ffffff'
@@ -237,7 +237,7 @@ export default function StudyPage() {
 
     if (newStrokeIdList.length <= 3) {
       newDisplayedStrokeIds = newDisplayedStrokeIds.concat(strokeIdList);
-      strokeIdList = [];
+      newStrokeIdList = [];
     } else {
       for(let i=0;i<3;i++) {
         if (newStrokeIdList.length == 0) break;
@@ -275,22 +275,22 @@ export default function StudyPage() {
   return (<>
     <div><h1><span className={indexStyles.red}>字</span>Button</h1></div>
 
-    <div className={styles.characterDisplayDiv}>
+    <div className={styles.characterDiv}>
       <h1>Study Mode</h1>
       <p>Click the button that shows the next character stroke.</p>
 
-      <p class={styles.definition}><b>Definition</b>: {currentDef}, <b>Pinyin</b>: {currentPinyin}</p>
+      <p className={styles.definition}><b>Definition</b>: {currentDef}, <b>Pinyin</b>: {currentPinyin}</p>
 
-      <div id={styles.characterDisplay} className={'surfaceDiv'}>
+      <div className={`surfaceDiv ${styles.mainCharacterDisplay}`}>
       </div>
     </div>
 
     <div className={styles.buttonBar}>
-      <div className={styles.correctDisplay} style={isCorrectStrokeShown ? 'bottom: 0%;' : 'bottom: 100%;'}>Correct!</div>
-      <div className={styles.correctDisplay} style={isCharacterCompleteShown ? 'bottom: 0%;' : 'bottom: 100%;'}>Character complete!</div>
-      <div className={styles.incorrectDisplay} style={isIncorrectShown ? 'bottom: 0%;' : 'bottom: 100%;'}>Incorrect</div>
+      <div className={styles.correctDisplay} style={isCorrectStrokeShown ? {bottom: '0%'} : {bottom: '100%'}}>Correct!</div>
+      <div className={styles.correctDisplay} style={isCharacterCompleteShown ? {bottom: '0%'} : {bottom: '100%'}}>Character complete!</div>
+      <div className={styles.incorrectDisplay} style={isIncorrectShown ? {bottom: '0%'} : {bottom: '100%'}}>Incorrect</div>
 
-      <div className={styles.buttonWrapper}>{!isCharacterCompleteShown ? displayedStrokeIds.map(id => <StrokeButton strokeId={id} currentCharacter={currentCharacter} setSelectedStrokeId={setSelectedStrokeId} />) : ''}</div>
+      <div className={styles.buttonWrapper}>{!isCharacterCompleteShown ? displayedStrokeIds.map(id => <StrokeButton key={id} strokeId={id} currentCharacter={currentCharacter} setSelectedStrokeId={setSelectedStrokeId} />) : ''}</div>
     </div>
   </>)
 }
