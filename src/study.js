@@ -78,6 +78,8 @@ export default function StudyPage() {
   const [ characterInfo, setCharacterInfo ] = useState(null);
   const [ mainCharacterWriter, setMainCharacterWriter ] = useState(null);
   const [ selectedStrokeId, setSelectedStrokeId ] = useState(null);
+
+  /* UI STATES */
   const [ isCharacterCompleteShown, setIsCharacterCompleteShown ] = useState(false);
   const [ isCorrectStrokeShown, setIsCorrectStrokeShown ] = useState(false);
 
@@ -123,7 +125,8 @@ export default function StudyPage() {
       } else {
         setCorrectStroke(correctStroke => correctStroke + 1);
         setIsCorrectStrokeShown(true);
-        setTimeout(refreshStrokes, 1000);
+        setTimeout(() => {refreshStrokes(); setIsCorrectStrokeShown(false);}, 1000);
+        console.log('This is the refreshstrokes runner, correctStrokes is ' + correctStroke + '. Next time you should see ' + (correctStroke+1))
       }
     }
   }, [selectedStrokeId])
@@ -216,7 +219,52 @@ export default function StudyPage() {
   }
 
   function refreshStrokes() {
+    /*
+    5. Clear displayedStrokeIds
+    6. Render the stroke with the same id as correctStroke. Remove it from list of stroke ids
+    7. Randomly pick 3 other ids, render those strokes, remove those ids from list of stroke ids. If not enough ids just render all of them
+    */
+    console.log('This is refresh strokes, correctStroke is', correctStroke)
+    let newDisplayedStrokeIds = [correctStroke];
+    let newStrokeIdList = [...strokeIdList];
+
+    newStrokeIdList.splice(newStrokeIdList.indexOf(correctStroke), 1);
+
+    if (newStrokeIdList.length <= 3) {
+      newDisplayedStrokeIds = newDisplayedStrokeIds.concat(strokeIdList);
+      strokeIdList = [];
+    } else {
+      for(let i=0;i<3;i++) {
+        if (newStrokeIdList.length == 0) break;
+
+        let index = Math.floor(Math.random() * newStrokeIdList.length);
+        newDisplayedStrokeIds.push(newStrokeIdList[index]);
+        newStrokeIdList.splice(index, 1);
+      }
+    }
+
+    shuffle(newDisplayedStrokeIds);
     
+    setDisplayedStrokeIds(newDisplayedStrokeIds);
+    setStrokeIdList(newStrokeIdList);
+  }
+
+  function shuffle(array) {
+    let currentIndex = array.length,  randomIndex;
+  
+    // While there remain elements to shuffle.
+    while (currentIndex > 0) {
+  
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+  
+    return array;
   }
 
   return (<>
