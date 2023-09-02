@@ -82,6 +82,7 @@ export default function StudyPage() {
   /* UI STATES */
   const [ isCharacterCompleteShown, setIsCharacterCompleteShown ] = useState(false);
   const [ isCorrectStrokeShown, setIsCorrectStrokeShown ] = useState(false);
+  const [ isIncorrectShown, setIsIncorrectShown ] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem('characterList') != null && localStorage.getItem('characterList') != '') {
@@ -282,7 +283,9 @@ export default function StudyPage() {
     </div>
 
     <div className={styles.buttonBar}>
-      <div className={styles.characterComplete} style={isCharacterCompleteShown ? 'bottom: 0%;' : 'bottom: 1000%;'}>Character complete!</div>
+      <div className={styles.correctDisplay} style={isCorrectStrokeShown ? 'bottom: 0%;' : 'bottom: 100%;'}>Correct!</div>
+      <div className={styles.correctDisplay} style={isCharacterCompleteShown ? 'bottom: 0%;' : 'bottom: 100%;'}>Character complete!</div>
+      <div className={styles.incorrectDisplay} style={isIncorrectShown ? 'bottom: 0%;' : 'bottom: 100%;'}>Incorrect</div>
 
       <div className={styles.buttonWrapper}>{!isCharacterCompleteShown ? displayedStrokeIds.map(id => <StrokeButton strokeId={id} currentCharacter={currentCharacter} setSelectedStrokeId={setSelectedStrokeId} />) : ''}</div>
     </div>
