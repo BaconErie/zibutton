@@ -120,6 +120,7 @@ export default function StudyPage() {
 
     if (selectedStrokeId == correctStroke) {
       if (selectedStrokeId == finalStroke) {
+        mainCharacterWriter.animateStroke(correctStroke);
         setIsCharacterCompleteShown(true);
         setDisplayedStrokeIds([]);
         setTimeout(quizNewCharacter, 1000);
@@ -128,7 +129,6 @@ export default function StudyPage() {
         setCorrectStroke(correctStroke => correctStroke + 1);
         setIsCorrectStrokeShown(true);
         setTimeout(() => {refreshStrokes(); setIsCorrectStrokeShown(false);}, 1000);
-        console.log('This is the refreshstrokes runner, correctStrokes is ' + correctStroke + '. Next time you should see ' + (correctStroke+1))
       }
     } else {
       setIsIncorrectShown(true);
@@ -185,7 +185,7 @@ export default function StudyPage() {
     newStrokeIdList.splice(newStrokeIdList.indexOf(0), 1);
     let newDisplayedStrokeIds = [0];
     if (newStrokeIdList.length <= 3) {
-      newDisplayedStrokeIds = newDisplayedStrokeIds.concat(strokeIdList);
+      newDisplayedStrokeIds = newDisplayedStrokeIds.concat(newStrokeIdList);
       newStrokeIdList = [];
     } else {
       for(let i=0;i<3;i++) {
@@ -208,8 +208,10 @@ export default function StudyPage() {
     setDisplayedStrokeIds(newDisplayedStrokeIds);
     setFinalStroke(numOfStrokes-1);
     setIsCharacterCompleteShown(false);
+    setSelectedStrokeId(null);
 
     const characterDisplay = document.getElementsByClassName(styles.mainCharacterDisplay)[0];
+    characterDisplay.innerHTML = '';
     let sizeToUse = characterDisplay.clientHeight < characterDisplay.clientWidth ? characterDisplay.clientHeight : characterDisplay.clientWidth;
     let newMainCharacterWriter = HanziWriter.create(document.getElementsByClassName(styles.mainCharacterDisplay)[0], newCharacter, {
       width: sizeToUse-25,
@@ -229,14 +231,15 @@ export default function StudyPage() {
     6. Render the stroke with the same id as correctStroke. Remove it from list of stroke ids
     7. Randomly pick 3 other ids, render those strokes, remove those ids from list of stroke ids. If not enough ids just render all of them
     */
-    console.log('This is refresh strokes, correctStroke is', correctStroke)
     let newDisplayedStrokeIds = [correctStroke];
     let newStrokeIdList = [...strokeIdList];
+
+    newStrokeIdList = newStrokeIdList.concat(displayedStrokeIds);
 
     newStrokeIdList.splice(newStrokeIdList.indexOf(correctStroke), 1);
 
     if (newStrokeIdList.length <= 3) {
-      newDisplayedStrokeIds = newDisplayedStrokeIds.concat(strokeIdList);
+      newDisplayedStrokeIds = newDisplayedStrokeIds.concat(newStrokeIdList);
       newStrokeIdList = [];
     } else {
       for(let i=0;i<3;i++) {
@@ -252,6 +255,7 @@ export default function StudyPage() {
     
     setDisplayedStrokeIds(newDisplayedStrokeIds);
     setStrokeIdList(newStrokeIdList);
+    setSelectedStrokeId(null);
   }
 
   function shuffle(array) {

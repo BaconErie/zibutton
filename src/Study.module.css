@@ -50,6 +50,11 @@ main {
 }
 
 .correctDisplay {
+    text-align: center;
+    font-size: 2rem;
+
+    box-shadow: none;
+
     height: 100%;
     width: 100%;
 
@@ -59,9 +64,16 @@ main {
     bottom: 100%;
 
     transition-duration: 0.5s;
+
+    z-index: 99;
 }
 
 .incorrectDisplay {
+    text-align: center;
+    font-size: 2rem;
+
+    box-shadow: none;
+
     height: 100%;
     width: 100%;
 
@@ -71,6 +83,8 @@ main {
     bottom: 100%;
 
     transition-duration: 0.5s;
+
+    z-index: 99;
 }
 
 .strokeButton {
