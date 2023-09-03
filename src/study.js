@@ -128,11 +128,11 @@ export default function StudyPage() {
         mainCharacterWriter.animateStroke(correctStroke);
         setCorrectStroke(correctStroke => correctStroke + 1);
         setIsCorrectStrokeShown(true);
-        setTimeout(() => {refreshStrokes(); setIsCorrectStrokeShown(false);}, 1000);
+        setTimeout(() => {refreshStrokes(correctStroke+1); setIsCorrectStrokeShown(false);}, 1000);
       }
     } else {
       setIsIncorrectShown(true);
-      setTimeout(() => {refreshStrokes(); setIsIncorrectShown(false);}, 1000);
+      setTimeout(() => {refreshStrokes(correctStroke+1); setIsIncorrectShown(false);}, 1000);
     }
   }, [selectedStrokeId])
 
@@ -225,18 +225,19 @@ export default function StudyPage() {
     setMainCharacterWriter(newMainCharacterWriter);
   }
 
-  function refreshStrokes() {
+  function refreshStrokes(newCorrectStroke) {
     /*
     5. Clear displayedStrokeIds
     6. Render the stroke with the same id as correctStroke. Remove it from list of stroke ids
     7. Randomly pick 3 other ids, render those strokes, remove those ids from list of stroke ids. If not enough ids just render all of them
     */
-    let newDisplayedStrokeIds = [correctStroke];
+   
+    let newDisplayedStrokeIds = [newCorrectStroke];
     let newStrokeIdList = [...strokeIdList];
 
     newStrokeIdList = newStrokeIdList.concat(displayedStrokeIds);
 
-    newStrokeIdList.splice(newStrokeIdList.indexOf(correctStroke), 1);
+    newStrokeIdList.splice(newStrokeIdList.indexOf(newCorrectStroke), 1);
 
     if (newStrokeIdList.length <= 3) {
       newDisplayedStrokeIds = newDisplayedStrokeIds.concat(newStrokeIdList);
