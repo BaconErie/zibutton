@@ -1,0 +1,145 @@
+/* BaconErie's global.css */
+
+:root {
+    --primary-color: 238, 106, 106; /* Change to whatever */
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #999999;
+    border-radius: 10px;
+}
+
+* {
+    font-family: 'Open Sans', sans-serif;
+    color: #ffffff;
+    flex-wrap: wrap;
+}
+
+h1 {
+    margin: 0px;
+    padding: 0px;
+}
+
+h2 {
+    margin: 0px;
+}
+
+body {
+    background-color: #121212;
+}
+
+p {
+    margin: 0px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+div {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+
+    padding: 1rem;
+    box-shadow: 0px 0px 10px #000000;
+    border-radius: 10px;
+    background-color: #272727;
+    box-sizing: border-box;
+
+    color: #ffffff;
+}
+
+input {
+    display: flex;
+    flex-direction: column;
+
+    padding: 0.5rem;
+    border-radius: 10px;
+    background-color: #272727;
+
+    box-sizing: border-box;
+    border: solid;
+    border-width: 1px;
+    border-color: #999999;
+
+    color: #ffffff;
+}
+
+input:focus {
+    border-color: rgba(var(--primary-color), 1);
+    outline: none;
+}
+
+ul {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+
+    padding: 0px;
+    border-radius: 10px;
+    background-color: #272727;
+
+    box-sizing: border-box;
+    box-shadow: none;
+    border: solid;
+    border-width: 1px;
+    border-color: #999999;
+
+    color: #ffffff;
+
+    overflow: scroll;
+}
+
+li {
+    margin: 0px;
+    box-shadow: none;
+    border-radius: 10px 10px 0px 0px;
+
+    border: none;
+    border-bottom: 1px solid;
+    border-color: #999999;
+    
+    text-align: left;
+
+    padding: 0.5rem;
+}
+
+.wrapper {
+    display: block;
+    padding: 0px;
+    margin: 0px;
+    box-shadow: none;
+    background-color: rgba(255, 0, 0, 0);   
+}
+
+.wrapper > * {
+    width: 100%;
+}
+
+.surfaceDiv {
+    display: flex;
+    flex-direction: column;
+
+    padding: 0.5rem;
+    border-radius: 10px;
+    background-color: #272727;
+
+    box-sizing: border-box;
+    box-shadow: none;
+    border: solid;
+    border-width: 1px;
+    border-color: #999999;
+
+    color: #ffffff;
+}
+
+.hidden {
+    display: none;
+}

@@ -1,0 +1,28 @@
+.characterList {
+    height: 50vh;
+}
+
+.inputBar {
+    display: flex;
+    flex-direction: row;
+    column-gap: 2rem;
+
+    box-shadow: none;
+
+    padding: 0px;
+    margin: 0px;
+}
+
+.inputBar > input {
+    flex-grow: 1;
+}
+
+.inputBar > span {
+    display: flex;
+    column-gap: 0.5rem;
+    row-gap: 0.5rem;
+}
+
+.red {
+    color: rgb(var(--primary-color));
+}
