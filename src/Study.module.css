@@ -63,9 +63,9 @@ main {
     left: 0px;
     bottom: 100%;
 
-    transition-duration: 0.5s;
+    transition-duration: 0.2s;
 
-    z-index: 99;
+    z-index: 999999999999;
 }
 
 .incorrectDisplay {
@@ -82,9 +82,9 @@ main {
     left: 0px;
     bottom: 100%;
 
-    transition-duration: 0.5s;
+    transition-duration: 0.2s;
 
-    z-index: 99;
+    z-index: 999999999999;
 }
 
 .strokeButton {

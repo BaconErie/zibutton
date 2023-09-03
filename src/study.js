@@ -83,6 +83,7 @@ export default function StudyPage() {
   const [ isCharacterCompleteShown, setIsCharacterCompleteShown ] = useState(false);
   const [ isCorrectStrokeShown, setIsCorrectStrokeShown ] = useState(false);
   const [ isIncorrectShown, setIsIncorrectShown ] = useState(false);
+  const [ isDoneShown, setIsDoneShown ] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem('characterList') != null && localStorage.getItem('characterList') != '') {
@@ -119,20 +120,25 @@ export default function StudyPage() {
       */
 
     if (selectedStrokeId == correctStroke) {
+      mainCharacterWriter.animateStroke(correctStroke);
+
       if (selectedStrokeId == finalStroke) {
-        mainCharacterWriter.animateStroke(correctStroke);
+        if (charactersToQuiz.length == 0) {
+          setIsDoneShown(true);
+          return;
+        }
+
         setIsCharacterCompleteShown(true);
         setDisplayedStrokeIds([]);
         setTimeout(quizNewCharacter, 1000);
       } else {
-        mainCharacterWriter.animateStroke(correctStroke);
         setCorrectStroke(correctStroke => correctStroke + 1);
         setIsCorrectStrokeShown(true);
-        setTimeout(() => {refreshStrokes(correctStroke+1); setIsCorrectStrokeShown(false);}, 1000);
+        setTimeout(() => {refreshStrokes(correctStroke+1); setIsCorrectStrokeShown(false);}, 500);
       }
     } else {
       setIsIncorrectShown(true);
-      setTimeout(() => {refreshStrokes(correctStroke+1); setIsIncorrectShown(false);}, 1000);
+      setTimeout(() => {refreshStrokes(correctStroke+1); setIsIncorrectShown(false);}, 500);
     }
   }, [selectedStrokeId])
 
@@ -162,11 +168,10 @@ export default function StudyPage() {
   }
 
   async function quizNewCharacter() {
-    let newCharactersToQuiz = null;
-    if (charactersToQuiz.length == 0) {
-      newCharactersToQuiz = localStorage.getItem('characterList').split(',');
-    } else {
-      newCharactersToQuiz = [...charactersToQuiz];
+    let newCharactersToQuiz = [...charactersToQuiz];
+    
+    if (newCharactersToQuiz.length == 0) {
+      return;
     }
 
     let index = Math.floor(Math.random() * newCharactersToQuiz.length);
@@ -293,6 +298,10 @@ export default function StudyPage() {
     <div className={styles.buttonBar}>
       <div className={styles.correctDisplay} style={isCorrectStrokeShown ? {bottom: '0%'} : {bottom: '100%'}}>Correct!</div>
       <div className={styles.correctDisplay} style={isCharacterCompleteShown ? {bottom: '0%'} : {bottom: '100%'}}>Character complete!</div>
+      <div className={styles.correctDisplay} style={isDoneShown ? {bottom: '0%'} : {bottom: '100%'}}>
+        All characters complete!<br/>
+        <a href={'index.html'}>Go back</a> or <a href={'study.html'}>Restart</a>
+        </div>
       <div className={styles.incorrectDisplay} style={isIncorrectShown ? {bottom: '0%'} : {bottom: '100%'}}>Incorrect</div>
 
       <div className={styles.buttonWrapper}>{!isCharacterCompleteShown ? displayedStrokeIds.map(id => <StrokeButton key={id} strokeId={id} currentCharacter={currentCharacter} setSelectedStrokeId={setSelectedStrokeId} />) : ''}</div>
