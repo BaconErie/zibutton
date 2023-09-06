@@ -26,6 +26,10 @@ main {
     justify-content: center;
     align-items: center;
     padding: 0px;
+
+    background-image: url('grid.svg');
+    background-position: center center;
+    background-repeat: no-repeat;
 }
 
 .buttonBar {

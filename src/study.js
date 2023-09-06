@@ -227,6 +227,8 @@ export default function StudyPage() {
       strokeColor: '#ffffff'
     })
 
+    document.getElementsByClassName(styles.mainCharacterDisplay)[0].style.backgroundSize = sizeToUse-25 + 'px';
+
     setMainCharacterWriter(newMainCharacterWriter);
   }
 
