@@ -138,7 +138,7 @@ export default function StudyPage() {
       }
     } else {
       setIsIncorrectShown(true);
-      setTimeout(() => {refreshStrokes(correctStroke+1); setIsIncorrectShown(false);}, 500);
+      setTimeout(() => {refreshStrokes(correctStroke); setIsIncorrectShown(false);}, 500);
     }
   }, [selectedStrokeId])
 
@@ -251,8 +251,6 @@ export default function StudyPage() {
       newStrokeIdList = [];
     } else {
       for(let i=0;i<3;i++) {
-        if (newStrokeIdList.length == 0) break;
-
         let index = Math.floor(Math.random() * newStrokeIdList.length);
         newDisplayedStrokeIds.push(newStrokeIdList[index]);
         newStrokeIdList.splice(index, 1);
@@ -260,6 +258,18 @@ export default function StudyPage() {
     }
 
     shuffle(newDisplayedStrokeIds);
+
+    console.log('newDisplayedStrokeIds', newDisplayedStrokeIds)
+    console.log('newCorrectStroke', newCorrectStroke)
+    let notfound = true;
+    for (let id of newDisplayedStrokeIds) {
+      if (id == newCorrectStroke) {
+        notfound = false;
+        break;
+      }
+    }
+
+    if (notfound) alert('yo br what where the answer ag')
     
     setDisplayedStrokeIds(newDisplayedStrokeIds);
     setStrokeIdList(newStrokeIdList);
@@ -267,7 +277,8 @@ export default function StudyPage() {
   }
 
   function shuffle(array) {
-    let currentIndex = array.length,  randomIndex;
+    let currentIndex = array.length;
+    let randomIndex = 0;
   
     // While there remain elements to shuffle.
     while (currentIndex > 0) {
