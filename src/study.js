@@ -309,13 +309,15 @@ export default function StudyPage() {
     </div>
 
     <div className={styles.buttonBar}>
-      <div className={styles.correctDisplay} style={isCorrectStrokeShown ? {bottom: '0%'} : {bottom: '100%'}}>Correct!</div>
-      <div className={styles.correctDisplay} style={isCharacterCompleteShown ? {bottom: '0%'} : {bottom: '100%'}}>Character complete!</div>
-      <div className={styles.correctDisplay} style={isDoneShown ? {bottom: '0%'} : {bottom: '100%'}}>
-        All characters complete!<br/>
-        <a href={'index.html'}>Go back</a> or <a href={'study.html'}>Restart</a>
+      <div className={styles.correctDisplay} style={isCorrectStrokeShown ? {bottom: '0%', visibility: 'visible'} : {bottom: '100%', visibility: 'hidden'}}>Correct!</div>
+      <div className={styles.correctDisplay} style={isCharacterCompleteShown ? {bottom: '0%', visibility: 'visible'} : {bottom: '100%', visibility: 'hidden'}}>Character complete!</div>
+      <div className={styles.correctDisplay} style={isDoneShown ? {bottom: '0%', visibility: 'visible'} : {bottom: '100%', visibility: 'hidden', fontSize: '20%'}}>
+        <div>All characters complete!</div>
+        <div>
+          <a href={'index.html'}>Go back</a> or <a href={'study.html'}>Restart</a>
         </div>
-      <div className={styles.incorrectDisplay} style={isIncorrectShown ? {bottom: '0%'} : {bottom: '100%'}}>Incorrect</div>
+      </div>
+      <div className={styles.incorrectDisplay} style={isIncorrectShown ? {bottom: '0%', visibility: 'visible'} : {bottom: '100%', visibility: 'hidden'}}>Incorrect</div>
 
       <div className={styles.buttonWrapper}>{!isCharacterCompleteShown ? displayedStrokeIds.map(id => <StrokeButton key={id} strokeId={id} currentCharacter={currentCharacter} setSelectedStrokeId={setSelectedStrokeId} />) : ''}</div>
     </div>
