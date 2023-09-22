@@ -259,8 +259,6 @@ export default function StudyPage() {
 
     shuffle(newDisplayedStrokeIds);
 
-    console.log('newDisplayedStrokeIds', newDisplayedStrokeIds)
-    console.log('newCorrectStroke', newCorrectStroke)
     let notfound = true;
     for (let id of newDisplayedStrokeIds) {
       if (id == newCorrectStroke) {
@@ -268,8 +266,6 @@ export default function StudyPage() {
         break;
       }
     }
-
-    if (notfound) alert('yo br what where the answer ag')
     
     setDisplayedStrokeIds(newDisplayedStrokeIds);
     setStrokeIdList(newStrokeIdList);
