@@ -95,6 +95,17 @@ main {
     z-index: 999999999999;
 }
 
+
+@media (min-width: 800px) {
+    .correctDisplay {
+        font-size: 2rem;
+    }
+
+    .incorrectDisplay {
+        font-size: 2rem;
+    }
+}
+
 .correctDisplay > div {
     box-shadow: none;
     background-color: #2bbd55;
