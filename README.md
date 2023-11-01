@@ -23,7 +23,7 @@ How to run the app locally
 
 2. Run `npm install` at the top most directory to install all the dependencies (make sure your NODE_ENV is NOT set to production)
 
-3. Run `npm run build`. The built and ready-to-use extension will be in the `docs` folder.
+3. Run `npm run build`. The built and ready-to-use pages will be in the `docs` folder.
 
 4. Run `npm run dev` to start serving the files.
 
@@ -32,7 +32,7 @@ How to run the app locally
 - JavaScript as the language
 - React.js as the UI library for the options page
 - [HanziWriter](https://hanziwriter.org/) as the library that renders the characters
-- Webpack and Babel.js to compile and make the options page browser readable
+- Webpack and Babel.js to compile the JSX
 
 # License
 
