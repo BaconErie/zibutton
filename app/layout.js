@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang='en'>
       <body className={openSans.className}>
-        <Topbar />
+        <Topbar username={'user'} />
         {children}
       </body>
     </html>
