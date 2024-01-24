@@ -21,7 +21,7 @@ export async function hashPassword(plaintext) {
 }
 
 export async function generateToken(userId) {
-  return jwt.sign({userId: userId, issueTime: Date.now()/1000}, process.env.TOKEN_SECRET);
+  return jwt.sign({userId: userId}, process.env.TOKEN_SECRET);
 }
 
 export async function getUserIdFromToken() {
