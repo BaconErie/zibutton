@@ -64,5 +64,5 @@ export async function handleSignup(username, password) {
   cookies().set('token', token);
   cookies().set('username', username);
 
-  redirect('/');
+  redirect('/lists');
 }
