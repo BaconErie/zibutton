@@ -1,11 +1,11 @@
 'use client'
 
-import { handleLogin } from './loginServer';
+import { handleSignup } from './signupServer';
 
-import './login.css';
+import '../login/login.css';
 import PrimaryButton from '@/lib/ui/baconerie/PrimaryButton/PrimaryButton';
 
-export default function LoginPage() {
+export default function SignupPage() {
   function handleFormSubmit(e) {
     e.preventDefault();
 
@@ -17,7 +17,7 @@ export default function LoginPage() {
 
   return (<>
     <div>
-      <h1>Login</h1>
+      <h1>Sign up</h1>
 
       <form onSubmit={handleFormSubmit}>
         <label htmlFor={'username'}>Username</label><br />
@@ -26,7 +26,7 @@ export default function LoginPage() {
         <label htmlFor={'password'}>Password</label><br />
         <input id={'password'} type={'password'} placeholder={'Password'} />
         <br />
-        <PrimaryButton type="submit">Login</PrimaryButton>
+        <PrimaryButton type="submit">Sign up</PrimaryButton>
       </form>
     </div>
   </>)
