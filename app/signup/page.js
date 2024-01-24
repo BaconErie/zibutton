@@ -3,9 +3,9 @@
 import { handleSignup } from './signupServer';
 import { useState } from 'react';
 
-import styles from './signup.module.css';
+import styles from '@/lib/ui/auth/auth.module.css';
 
-import '../login/login.css';
+import '@/lib/ui/auth/auth.css';
 import PrimaryButton from '@/lib/ui/baconerie/PrimaryButton/PrimaryButton';
 
 export default function SignupPage() {
