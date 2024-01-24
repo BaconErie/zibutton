@@ -1,0 +1,23 @@
+.red {
+    color: rgb(var(--primary-color));
+}
+
+#topbarDiv {
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#indexLink {
+    text-decoration: none;
+}
+
+#topbarButtonWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 0.5rem;
+}
+
+#topbarButtonWrapper > * {
+    width: initial;
+}
