@@ -11,7 +11,7 @@ const openSans = Open_Sans({
 
 export default function RootLayout({ children }) {
   const userId = getUserIdFromToken();
-  console.log(userId)
+
   return (
     <html lang='en'>
       <body className={openSans.className}>

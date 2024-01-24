@@ -17,7 +17,7 @@ export default function Topbar({ username }) {
   }
 
   return (<div id={topbarStyles.topbarDiv}>
-    <h1><span className={topbarStyles.red}>字</span>Button</h1>
+    <Link id={topbarStyles.indexLink} href="/"><h1><span className={topbarStyles.red}>字</span>Button</h1></Link>
     
     <div id={topbarStyles.topbarButtonWrapper} className={'wrapper'}>
       {buttons}
