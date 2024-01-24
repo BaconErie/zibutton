@@ -9,8 +9,8 @@ const openSans = Open_Sans({
   subsets: ['latin']
 });
 
-export default function RootLayout({ children }) {
-  const userId = getUserIdFromToken();
+export default async function RootLayout({ children }) {
+  const userId = await getUserIdFromToken();
 
   return (
     <html lang='en'>

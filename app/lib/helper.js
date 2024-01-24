@@ -1,4 +1,5 @@
 /* Functions useful for server side */
+'use server'
 
 import { cookies } from 'next/headers'
 import jwt from 'jsonwebtoken';
@@ -19,11 +20,11 @@ export async function hashPassword(plaintext) {
   }));
 }
 
-export function generateToken(userId) {
+export async function generateToken(userId) {
   return jwt.sign({userId: userId, issueTime: Date.now()/1000}, process.env.TOKEN_SECRET);
 }
 
-export function getUserIdFromToken() {
+export async function getUserIdFromToken() {
   /* Returns userId from token or null */
   const cookieStore = cookies()
 
