@@ -1,19 +1,29 @@
 'use client'
 
 import { handleSignup } from './signupServer';
+import { useState } from 'react';
+
+import styles from './signup.module.css';
 
 import '../login/login.css';
 import PrimaryButton from '@/lib/ui/baconerie/PrimaryButton/PrimaryButton';
 
 export default function SignupPage() {
-  function handleFormSubmit(e) {
+  const [errorMessage, setErrorMessage] = useState('');
+
+  async function handleFormSubmit(e) {
     e.preventDefault();
+    e.stopPropagation();
 
-    const username = e.target.getElementById('username');
-    const password = e.target.getElementById('password');
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
 
-    handleLogin(username, password);
-  } 
+    const result = await handleSignup(username, password);
+    
+    if (result && result.error) {
+      setErrorMessage(result.message);
+    }
+  }
 
   return (<>
     <div>
@@ -21,13 +31,19 @@ export default function SignupPage() {
 
       <form onSubmit={handleFormSubmit}>
         <label htmlFor={'username'}>Username</label><br />
-        <input id={'username'} type={'text'} placeholder={'Username'} />
-        <br /><br />
+        <input required id={'username'} type={'text'} placeholder={'Username'} />
+        <br />
         <label htmlFor={'password'}>Password</label><br />
-        <input id={'password'} type={'password'} placeholder={'Password'} />
+        <input required id={'password'} type={'password'} placeholder={'Password'} />
         <br />
         <PrimaryButton type="submit">Sign up</PrimaryButton>
       </form>
+
+      {
+        errorMessage.length > 0 ? (
+          <div id={styles.error} className={'surfaceDiv'}>{errorMessage}</div>
+        ) : ''
+      }
     </div>
   </>)
 }

@@ -1,7 +1,10 @@
 /* BaconErie's global.css */
 
 :root {
-    --primary-color: 238, 106, 106; /* Change to whatever */
+    /* Change to whatever */
+    /* R, G, B */
+    --primary-color: 238, 106, 106; 
+    --error-color: 204, 63, 63;
 }
 
 ::-webkit-scrollbar {
