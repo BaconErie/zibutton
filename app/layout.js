@@ -1,7 +1,8 @@
-import Topbar from '@/lib/Topbar/Topbar';
+import Topbar from '@/lib/ui/Topbar/Topbar';
+import { getUserIdFromToken } from '@/lib/helper';
 
 import { Open_Sans } from 'next/font/google';
-import '@/lib/baconerie/styles/global.css';
+import '@/lib/ui/baconerie/styles/global.css';
 
 const openSans = Open_Sans({
   weight: '500',
@@ -9,10 +10,12 @@ const openSans = Open_Sans({
 });
 
 export default function RootLayout({ children }) {
+  const userId = getUserIdFromToken();
+  console.log(userId)
   return (
     <html lang='en'>
       <body className={openSans.className}>
-        <Topbar username={'user'} />
+        <Topbar username={userId} />
         {children}
       </body>
     </html>
