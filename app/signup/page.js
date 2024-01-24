@@ -12,6 +12,7 @@ export default function SignupPage() {
   const [errorMessage, setErrorMessage] = useState('');
 
   async function handleFormSubmit(e) {
+    setErrorMessage('');
     e.preventDefault();
     e.stopPropagation();
 

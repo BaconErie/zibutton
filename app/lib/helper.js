@@ -20,6 +20,14 @@ export async function hashPassword(plaintext) {
   }));
 }
 
+export async function verifyPassword(plaintext, hash) {
+  return new Promise((resolve => {
+    bcrypt.compare(plaintext, hash, function(_, result) {
+      resolve(result);
+    });
+  }));
+}
+
 export async function generateToken(userId) {
   return jwt.sign({userId: userId}, process.env.TOKEN_SECRET);
 }
