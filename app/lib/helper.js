@@ -34,3 +34,12 @@ export async function getUserIdFromToken() {
     return null;
   }
 }
+
+export async function getUsername() {
+  const cookieStore = cookies();
+
+  if (cookieStore.get('username'))
+    return cookieStore.get('username').value;
+  else
+    return null;
+}

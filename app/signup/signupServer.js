@@ -59,9 +59,10 @@ export async function handleSignup(username, password) {
 
   const dbRes = await dbGet('SELECT id FROM USERS WHERE username=?', [username]);
   const userId = dbRes[0].id;
-  const token = generateToken(userId);
+  const token = await generateToken(userId);
 
   cookies().set('token', token);
+  cookies().set('username', username);
 
   redirect('/');
 }
