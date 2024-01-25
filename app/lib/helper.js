@@ -9,7 +9,11 @@ import bcrypt from 'bcrypt';
 export async function dbGet(query, options) {
   /* Executes query and returns Promise that resolves to rows */
   const db = new sqlite3.Database(process.env.DB_PATH);
-  return new Promise((resolve) => db.all(query, options, (_, rows) => resolve(rows)))
+  return new Promise((resolve) => db.all(query, options, (err, rows) => {
+    if (!rows && err)
+      throw err;
+    resolve(rows)
+  }))
 }
 
 export async function hashPassword(plaintext) {
