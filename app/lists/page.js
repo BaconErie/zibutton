@@ -46,7 +46,7 @@ export default function ListsPage() {
     <div>
       <h1>
         Your lists<span>   </span>
-        <Link href={'/create'}>
+        <Link href={'/edit'}>
         <PrimaryButton id={styles.newListButton}>
           <div id={styles.plus} className={'newListButtonText wrapper'}>+</div>
           <div className={'newListButtonText wrapper'}>Create list</div>
