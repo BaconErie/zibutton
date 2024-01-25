@@ -9,8 +9,6 @@ export default function Template({ children }) {
   const [ username, setUsername ] = useState(null); 
 
   useEffect(() => {
-    console.log("hey guys")
-
     getUsername().then((username) => setUsername(username));
   })
 

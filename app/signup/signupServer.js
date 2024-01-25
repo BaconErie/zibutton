@@ -55,7 +55,7 @@ export async function handleSignup(username, password) {
   
   const hashed_password = await hashPassword(password);
 
-  await dbGet('INSERT INTO users (username, password, time_created) VALUES (?, ?, ?)', [username, hashed_password, Math.floor(Date.now()/1000)]);
+  await dbGet('INSERT INTO users (username, password, timeCreated) VALUES (?, ?, ?)', [username, hashed_password, Math.floor(Date.now()/1000)]);
 
   const dbRes = await dbGet('SELECT id FROM USERS WHERE username=?', [username]);
   const userId = dbRes[0].id;

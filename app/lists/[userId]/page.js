@@ -1,5 +1,7 @@
-import ListsPage from '../page';
-
 export default function ListsWithUserIdPage({ params }) {
-  return <ListsPage params={params} />
+  return (<>
+    <div>
+      <h1>Your lists</h1>
+    </div>
+  </>);
 }
