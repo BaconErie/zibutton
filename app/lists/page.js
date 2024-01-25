@@ -7,6 +7,10 @@ import ListDisplay from './ListDisplay';
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import PrimaryButton from '@/lib/ui/baconerie/PrimaryButton/PrimaryButton';
+import { redirect } from 'next/navigation';
+
+import styles from './lists.module.css';
 
 export default function ListsPage() {
   const [ lists, setLists ] = useState([]);
@@ -40,7 +44,15 @@ export default function ListsPage() {
 
   return (<>
     <div>
-      <h1>Your lists</h1>
+      <h1>
+        Your lists<span>   </span>
+        <Link href={'/create'}>
+        <PrimaryButton id={styles.newListButton}>
+          <div id={styles.plus} className={'newListButtonText wrapper'}>+</div>
+          <div className={'newListButtonText wrapper'}>Create list</div>
+        </PrimaryButton>
+        </Link>
+      </h1>
 
       {lists.length==0 ? (<p>You have no lists. Why not create one now?</p>) : ''}
 

@@ -1,0 +1,13 @@
+#plus {
+    font-size: 1.5em;
+}
+
+#newListButton {
+    display: inline-flex;
+    align-items: center;
+    column-gap: 0.5rem;
+}
+
+.newListButtonText {
+    display: block;
+}
