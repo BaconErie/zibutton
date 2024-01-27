@@ -8,7 +8,7 @@ import PrimaryButton from '@/lib/ui/baconerie/PrimaryButton/PrimaryButton';
 import SurfaceButton from '@/lib/ui/baconerie/SurfaceButton/SurfaceButton';
 
 import styles from './createPage.module.css';
-
+import { createList } from './editServer';
 
 
 function CharacterDisplay({ character, characterList, setCharacterList }) {
@@ -22,6 +22,7 @@ function CharacterDisplay({ character, characterList, setCharacterList }) {
 }
 
 export default function CreatePage() {
+  const [ errorMessage, setErrorMessage ] = useState(''); // Error message when submitting the list
   const [ listName, setListName ] = useState('');
   const [ characterList, setCharacterList ] = useState([]);
   const [ visibility, setVisibility ] = useState(false);
@@ -40,6 +41,17 @@ export default function CreatePage() {
   /*  
     EVENT HANDLERS
   */
+
+  async function handleListSubmit(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    setErrorMessage('');
+
+    const res = await createList(listName, visibility, characterList);
+
+    if (res && res.error)
+      setErrorMessage(res.message);
+  }
 
   async function validateCharacter(char) {
     // Make sure the character exists
@@ -97,7 +109,6 @@ export default function CreatePage() {
   async function handleAddCharacter() {
     setDisableAddChar(true);
 
-    const inputCharacters = charInput.split('');
     let newCharacterList = [...characterList];
     let notFoundCharacters = [];
 
@@ -177,7 +188,7 @@ export default function CreatePage() {
     <div>
       <h1>Create new list</h1>
 
-      <form>
+      <form onSubmit={handleListSubmit}>
         <div className={styles.optionsBar}>
           <label required htmlFor={'listName'}>List name</label>
           <input required className={styles.flexGrow} id={'listName'} type={'text'} placeholder={'List name'} value={listName} onChange={(e) => setListName(e.target.value)}></input>
@@ -202,7 +213,14 @@ export default function CreatePage() {
           {characterListComponents}
         </ul>
 
-        <PrimaryButton className={styles.submitList}>Create list</PrimaryButton>
+        <PrimaryButton type={'submit'} className={styles.submitList}>Create list</PrimaryButton>
+        <br /><br />
+        {
+        errorMessage.length > 0 ? (
+          <div className={styles.error + ' surfaceDiv'}>{errorMessage}</div>
+        ) : ''
+        }
+
       </form>
     </div>
   </>)
