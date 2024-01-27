@@ -7,7 +7,6 @@ import Toggle from '@/lib/ui/baconerie/Toggle/Toggle';
 import PrimaryButton from '@/lib/ui/baconerie/PrimaryButton/PrimaryButton';
 import SurfaceButton from '@/lib/ui/baconerie/SurfaceButton/SurfaceButton';
 
-import './createPage.css';
 import styles from './createPage.module.css';
 
 
