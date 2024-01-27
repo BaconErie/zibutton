@@ -203,6 +203,7 @@ export default function CreatePage() {
           {characterListComponents}
         </ul>
 
+        <PrimaryButton className={styles.submitList}>Create list</PrimaryButton>
       </form>
     </div>
   </>)
