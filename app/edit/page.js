@@ -115,8 +115,7 @@ export default function CreatePage() {
     }
 
     setCharacterList(newCharacterList);
-    document.getElementById('characterInput').value = '';
-    console.warn('Line 107, try https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable')
+    setCharInput('');
 
     setDisableAddChar(false);
 
@@ -191,7 +190,7 @@ export default function CreatePage() {
         <br /><br />
 
         <div className={styles.inputBar}>
-          <input className={styles.flexGrow} id="characterInput" type="text" placeholder="Enter a character" onInput={e => setCharInput(e.target.value)} disabled={disableAddChar}/>
+          <input className={styles.flexGrow} id="characterInput" type="text" placeholder="Enter a character" value={charInput} onInput={e => setCharInput(e.target.value)} disabled={disableAddChar}/>
           <span>
             <PrimaryButton onClick={handleAddCharacter} disabled={disableAddChar}>Add a character</PrimaryButton>
             <SurfaceButton onClick={handleImportList}>Import list</SurfaceButton>
