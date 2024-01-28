@@ -55,3 +55,12 @@ export async function getUsername() {
   else
     return null;
 }
+
+export async function getUsernameById(id) {
+  const queryResult = await dbGet('SELECT username FROM users WHERE id=?', [id]);
+
+  if (queryResult.length == 0)
+    return null;
+  else
+    return queryResult[0].username;
+}
