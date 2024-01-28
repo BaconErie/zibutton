@@ -57,7 +57,7 @@ export default function ListsPage() {
 
       <div className={styles.listsTable + ' wrapper'}>
         {lists.map(listRow => (
-            <ListDisplay id={listRow.id} listName={listRow.name} ownerName={listRow.ownerUsername} ownerId={listRow.ownerId} />
+            <ListDisplay key={listRow.id} id={listRow.id} listName={listRow.name} ownerName={listRow.ownerUsername} ownerId={listRow.ownerId} />
         ))}
       </div>
     </div>
