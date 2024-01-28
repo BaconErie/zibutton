@@ -138,6 +138,8 @@ li {
     padding: 0.5rem;
     border-radius: 10px;
     background-color: #272727;
+    margin-left: 0px;
+    margin-right: 0px;
 
     box-sizing: border-box;
     box-shadow: none;

@@ -8,7 +8,6 @@ import ListDisplay from './ListDisplay';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import PrimaryButton from '@/lib/ui/baconerie/PrimaryButton/PrimaryButton';
-import { redirect } from 'next/navigation';
 
 import styles from './lists.module.css';
 
@@ -56,9 +55,11 @@ export default function ListsPage() {
 
       {lists.length==0 ? (<p>You have no lists. Why not create one now?</p>) : ''}
 
-      {lists.map(listRow => (
-          <ListDisplay id={listRow.id} listName={listRow.name} ownerName={listRow.ownerUsername} ownerId={listRow.ownerId} />
-      ))}
+      <div className={styles.listsTable + ' wrapper'}>
+        {lists.map(listRow => (
+            <ListDisplay id={listRow.id} listName={listRow.name} ownerName={listRow.ownerUsername} ownerId={listRow.ownerId} />
+        ))}
+      </div>
     </div>
   </>);
 }
