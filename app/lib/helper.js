@@ -64,3 +64,17 @@ export async function getUsernameById(id) {
   else
     return queryResult[0].username;
 }
+
+export async function getListInfoFromId(listId) {
+  const queryResult = await dbGet('SELECT name, ownerId, ownerUsername, timeCreated, lastUpdated, visibility FROM lists WHERE id=?', [listId]);
+  const userId = await getUserIdFromToken();
+
+  if (queryResult.length == 0) {
+    return null;
+  }
+  else if (queryResult[0].visibility == 'private' && queryResult[0].ownerId != userId) {
+    return null;
+  } else {
+    return queryResult[0];
+  }
+}
