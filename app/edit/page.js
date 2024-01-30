@@ -6,20 +6,11 @@ import { useEffect, useState } from 'react';
 import Toggle from '@/lib/ui/baconerie/Toggle/Toggle';
 import PrimaryButton from '@/lib/ui/baconerie/PrimaryButton/PrimaryButton';
 import SurfaceButton from '@/lib/ui/baconerie/SurfaceButton/SurfaceButton';
+import CharacterDisplay from '@/lib/ui/CharacterDisplay/CharacterDisplay';
 
 import styles from './createPage.module.css';
 import { createList } from './editServer';
 
-
-function CharacterDisplay({ character, characterList, setCharacterList }) {
-  function handleDeleteCharacter() {
-    let newCharacterList = [...characterList];
-    newCharacterList.splice(newCharacterList.indexOf(character), 1);
-    setCharacterList(newCharacterList);
-  }
-
-  return (<li className={styles.characterDisplay}><SurfaceButton onClick={handleDeleteCharacter}>x</SurfaceButton> {character}</li>)
-}
 
 export default function CreatePage() {
   const [ errorMessage, setErrorMessage ] = useState(''); // Error message when submitting the list

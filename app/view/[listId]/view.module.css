@@ -1,0 +1,18 @@
+.infoBar {
+    display: flex;
+    flex-direction: row;
+    column-gap: 1rem;
+}
+
+.infoBar > * {
+    width: initial;
+    display: block;
+}
+
+.characterList {
+    height: 50vh;
+}
+
+.button {
+    width: 100%;
+}
