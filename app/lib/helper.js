@@ -1,7 +1,7 @@
 /* Functions useful for server side */
 'use server'
 
-import { cookies } from 'next/headers'
+import { cookies } from 'next/headers';
 import jwt from 'jsonwebtoken';
 import sqlite3 from 'sqlite3';
 import bcrypt from 'bcrypt';
