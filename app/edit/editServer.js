@@ -39,4 +39,39 @@ export async function createList(listName, visibility, characterList) {
 
   redirect('/view/' + listId);
 }
+
+export async function editExisitingList(listId, listName, visibility, characterList) {
+  const userId = await getUserIdFromToken();
+  const ownerId = (await dbGet('SELECT ownerId FROM lists WHERE id=?', [listId]))[0].ownerId;
+
+  if (ownerId != userId)
+    redirect('/not-found');
+
+  // List must now exist and the owner == user
+
+  if (!listName)
+    return {
+      error: true,
+      message: 'You need to enter a name for your list.'
+    };
+  
+  if (!characterList || characterList.length == 0)
+    return {
+      error: true,
+      message: 'You need to put something in your list.'
+    };
+  
+  let res = await dbGet('SELECT id FROM lists WHERE name=? AND ownerId=? AND id!=?', [listName, userId, listId]);
+  if (res.length != 0)
+    return {
+      error: true,
+      message: 'Another list with that same name exists.'
+    };
+  
+  const visibilityString = visibility ? 'public' : 'private';
+  
+  await dbGet('UPDATE lists SET name=?, visibility=?, characterList=?, lastUpdated=? WHERE id=?', [listName, visibilityString, characterList.join(''), Math.floor(Date.now()/1000), listId]);
+
+  redirect('/view/' + listId);
+}
  
