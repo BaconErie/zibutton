@@ -1,0 +1,18 @@
+.main {
+    display: block;
+}
+
+.main > ol > li {
+    border-style: none;
+}
+
+.buttonWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    column-gap: 1rem;
+}
+
+.buttonWrapper > a {
+    width: initial;
+}
