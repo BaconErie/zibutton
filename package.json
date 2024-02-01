@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "hanzi-writer": "^3.6.1",
     "jsonwebtoken": "^9.0.2",
     "next": "14.1.0",
     "react": "^18",
