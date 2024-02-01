@@ -71,8 +71,8 @@ export default function ViewList({ params }) {
 
   return (<>
     <div>
-      <h1>View list</h1>
-      <h2>{listName}</h2>
+      <h3>View list</h3>
+      <h1>{listName}</h1>
       <Link href={'/study/' + params.listId}><PrimaryButton className={styles.button}>Study List</PrimaryButton></Link>
       {userId == ownerId ? (<Link href={'/edit/' + params.listId}><PrimaryButton className={styles.button}>Edit list</PrimaryButton></Link>) : null} 
       <ul className={styles.characterList}>
