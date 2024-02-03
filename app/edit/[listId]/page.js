@@ -11,6 +11,7 @@ import CharacterDisplay from '@/lib/ui/CharacterDisplay/CharacterDisplay';
 
 import styles from '../createPage.module.css';
 import { editExisitingList } from '../editServer';
+import { redirect } from "next/navigation";
 
 
 export default function EditListPage({ params }) {

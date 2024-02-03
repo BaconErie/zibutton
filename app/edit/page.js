@@ -11,6 +11,8 @@ import CharacterDisplay from '@/lib/ui/CharacterDisplay/CharacterDisplay';
 import styles from './createPage.module.css';
 import { createList } from './editServer';
 
+import { redirect } from 'next/navigation';
+
 
 export default function CreatePage() {
   const [ errorMessage, setErrorMessage ] = useState(''); // Error message when submitting the list
