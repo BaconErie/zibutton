@@ -1,0 +1,142 @@
+/*
+main {
+    height: 100vh;
+    margin: -8px;
+    padding: 8px;
+    box-sizing: border-box;
+
+    flex-wrap: nowrap;
+}
+*/
+
+.definition {
+    text-align: center;
+}
+
+.definition > b {
+    text-decoration: underline;
+}
+
+.characterDiv {
+    display: flex;
+    flex-grow: 1;
+}
+
+.mainCharacterDisplay {
+    flex-grow: 1;
+
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+
+    background-image: url('grid.svg');
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.buttonBar {
+    position: relative;
+    display: block;
+    padding: 0px;
+    overflow: hidden;
+}
+
+.buttonWrapper {
+    display: flex;
+
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 0.5rem;
+    min-height: 82px;
+    position: relative;
+    overflow: hidden;
+
+    padding: 0px;
+    margin: 0px;
+}
+
+.correctDisplay {
+    margin: 0px;
+    display: block;
+
+    text-align: center;
+    font-size: 1rem;
+
+    box-shadow: none;
+
+    height: 100%;
+    width: 100%;
+
+    background-color: #2bbd55;
+    position: absolute;
+    left: 0px;
+    bottom: 100%;
+
+    transition-duration: 0.2s;
+
+    z-index: 999999999999;
+}
+
+.incorrectDisplay {
+    margin: 0px;
+    display: flex;
+
+    text-align: center;
+    font-size: 1rem;
+
+    box-shadow: none;
+
+    height: 100%;
+    width: 100%;
+
+    background-color: #ee6a6a;
+    position: absolute;
+    left: 0px;
+    bottom: 100%;
+
+    transition-duration: 0.2s;
+
+    z-index: 999999999999;
+}
+
+
+@media (min-width: 800px) {
+    .correctDisplay {
+        font-size: 2rem;
+    }
+
+    .incorrectDisplay {
+        font-size: 2rem;
+    }
+}
+
+.correctDisplay > div {
+    box-shadow: none;
+    background-color: #2bbd55;
+    padding: 0px;
+    width: 100%;
+    display: block;
+    font-size: 1em;
+}
+
+.incorrectDisplay > div {
+    box-shadow: none;
+    background-color: #ee6a6a;
+    padding: 0px;
+}
+
+.strokeButton {
+    height: 100%;
+    aspect-ratio: 1 / 1;
+
+    background-image: url('grid.svg');
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    padding: 0px !important;
+}
+
+.strokeButton:hover {
+    background-image: url('grid-red.svg');
+}
