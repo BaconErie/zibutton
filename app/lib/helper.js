@@ -12,6 +12,7 @@ export async function dbGet(query, options) {
   return new Promise((resolve) => db.all(query, options, (err, rows) => {
     if (!rows && err)
       throw err;
+    db.close();
     resolve(rows)
   }))
 }
