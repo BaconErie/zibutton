@@ -1,7 +1,6 @@
 'use server';
 
 import { dbGet, getUserIdFromToken, getUsername } from "@/lib/helper";
-import { redirect } from "next/navigation";
 
 export async function createList(listName, visibility, characterList) {
   const userId = await getUserIdFromToken();

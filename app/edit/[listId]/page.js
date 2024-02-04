@@ -11,7 +11,7 @@ import CharacterDisplay from '@/lib/ui/CharacterDisplay/CharacterDisplay';
 
 import styles from '../createPage.module.css';
 import { editExisitingList } from '../editServer';
-import { redirect } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
 
 export default function EditListPage({ params }) {
@@ -22,12 +22,14 @@ export default function EditListPage({ params }) {
   const [ charInput, setCharInput ] = useState(''); // Stores the current character being inputted
   const [ disableAddChar, setDisableAddChar ] = useState(false); // Prevents addition of new characters while adding current one
 
+  const router = useRouter();
+
   async function useEffectMain() {
     const userId = await getUserIdFromToken();
     const listInfo = await getListInfoFromId(params.listId);
 
     if (!userId || !listInfo || userId != listInfo.ownerId) 
-      redirect('/not-found');
+      router.push('/not-found');
     
     setCharacterList(listInfo.characterList);
     setListName(listInfo.name);
@@ -52,7 +54,7 @@ export default function EditListPage({ params }) {
     if (res && res.error)
       setErrorMessage(res.message);
     else (res && !res.error)
-      redirect('/view/' + res.listId);
+      router.push('/view/' + res.listId);
   }
 
   async function validateCharacter(char) {

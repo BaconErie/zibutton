@@ -1,6 +1,5 @@
 'use server'
 
-import { redirect } from "next/navigation";
 import { dbGet, getUserIdFromToken } from "@/lib/helper";
 
 export async function getListInfoFromId(listId) {

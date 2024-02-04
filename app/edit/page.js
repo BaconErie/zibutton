@@ -11,7 +11,7 @@ import CharacterDisplay from '@/lib/ui/CharacterDisplay/CharacterDisplay';
 import styles from './createPage.module.css';
 import { createList } from './editServer';
 
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 
 export default function CreatePage() {
@@ -22,9 +22,11 @@ export default function CreatePage() {
   const [ charInput, setCharInput ] = useState(''); // Stores the current character being inputted
   const [ disableAddChar, setDisableAddChar ] = useState(false); // Prevents addition of new characters while adding current one
 
+  const router = useRouter();
+
   async function useEffectMain() {
     if (!(await getUserIdFromToken())) 
-      redirect('/login');
+      router.push('/login');
   }
 
   useEffect(() => {
@@ -45,7 +47,7 @@ export default function CreatePage() {
     if (res && res.error)
       setErrorMessage(res.message);
     else if (res && !res.error)
-      redirect('/view/' + res.listId);
+      router.push('/view/' + res.listId);
   }
 
   async function validateCharacter(char) {

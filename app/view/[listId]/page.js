@@ -10,7 +10,7 @@ import styles from './view.module.css';
 import Link from 'next/link';
 import CharacterDisplay from '@/lib/ui/CharacterDisplay/CharacterDisplay';
 import PrimaryButton from "@/lib/ui/baconerie/PrimaryButton/PrimaryButton";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function ViewList({ params }) {
   const [listName, setListName] = useState('');
@@ -22,11 +22,13 @@ export default function ViewList({ params }) {
   const [ characterList, setCharacterList ] = useState([]);
   const [ userId, setUserId ] = useState(0);
 
+  const router = useRouter();
+
   async function useEffectMain() {
     const queryResult = await getListInfoFromId(params.listId);
 
     if (!queryResult)
-      redirect('/not-found');
+      router.push('/not-found');
 
     setListName(queryResult.name);
     setOwnerId(queryResult.ownerId);
