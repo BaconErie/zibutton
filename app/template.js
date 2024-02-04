@@ -10,7 +10,7 @@ export default function Template({ children }) {
 
   useEffect(() => {
     getUsername().then((username) => setUsername(username));
-  })
+  }, [])
 
   return (<>
     <Topbar username={username ? username : null} />

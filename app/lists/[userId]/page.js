@@ -30,7 +30,7 @@ export default function ListsWithUserIdPage({ params }) {
 
   useEffect(() => {
     useEffectMain();
-  })
+  }, [])
   
   if (!username)
     (<div>

@@ -31,7 +31,7 @@ export default function CreatePage() {
 
   useEffect(() => {
     useEffectMain();
-  });
+  }, []);
 
   /*  
     EVENT HANDLERS
