@@ -27,7 +27,7 @@ export default function ListsPage() {
 
   useEffect(() => {
     useEffectMain();
-  })
+  }, [])
   
 
   if (!username) {
