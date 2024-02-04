@@ -1,7 +1,6 @@
 'use server'
 
 import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation'
 
 import { dbGet, hashPassword, generateToken } from '@/lib/helper';
 
@@ -64,5 +63,8 @@ export async function handleSignup(username, password) {
   cookies().set('token', token);
   cookies().set('username', username);
 
-  redirect('/lists');
+  return {
+    error: false,
+    message: 'Success'
+  }
 }

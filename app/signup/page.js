@@ -6,10 +6,12 @@ import { useState } from 'react';
 import styles from '@/lib/ui/auth/auth.module.css';
 import '@/lib/ui/auth/auth.css';
 
+import { useRouter } from 'next/navigation';
 import PrimaryButton from '@/lib/ui/baconerie/PrimaryButton/PrimaryButton';
 
 export default function SignupPage() {
   const [errorMessage, setErrorMessage] = useState('');
+  const router = useRouter();
 
   async function handleFormSubmit(e) {
     setErrorMessage('');
@@ -23,6 +25,9 @@ export default function SignupPage() {
     
     if (result && result.error) {
       setErrorMessage(result.message);
+    } else if (result && !result.error) {
+      
+      router.push('/lists');
     }
   }
 
