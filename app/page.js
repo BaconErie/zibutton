@@ -19,7 +19,11 @@ export default function IndexPage()
       // If the jwt does not fail then token is verified
 
       try {
-      redirect('/lists');
+        redirect('/lists');
+      } catch (e) {
+        if (e.name != 'NEXT_REDIRECT')
+          throw e
+      }
     } catch (err){
       if (['JsonWebTokenError', 'TokenExpiredError', 'NotBeforeError'].indexOf(err.name) == -1)
         throw err; // throw non jwt errors
