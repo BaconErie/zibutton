@@ -44,6 +44,8 @@ export default function CreatePage() {
 
     if (res && res.error)
       setErrorMessage(res.message);
+    else if (res && !res.error)
+      redirect('/view/' + res.listId);
   }
 
   async function validateCharacter(char) {
