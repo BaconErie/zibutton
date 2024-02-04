@@ -7,7 +7,7 @@ export default function Topbar({ username }) {
   if (username) {
     buttons = (<>
       <b><div className={'wrapper'}>{username}</div></b>
-      <Link href={'/logout'}>Logout</Link>
+      <Link prefetch={false} href={'/logout'}>Logout</Link>
     </>)
   } else {
     buttons = (<>
