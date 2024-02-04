@@ -42,7 +42,7 @@ export default function ViewList({ params }) {
 
   useEffect(() => {
     useEffectMain();
-  });
+  }, []);
 
   function parseDate(unixTimeSeconds) {
     // why doesnt js have this
