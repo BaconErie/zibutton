@@ -30,5 +30,8 @@ export async function handleLogin(username, password) {
   cookies().set('token', token);
   cookies().set('username', username);
 
-  redirect('/lists');
+  return {
+    error: false,
+    message: 'Success'
+  }
 }

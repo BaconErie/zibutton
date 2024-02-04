@@ -8,7 +8,10 @@ export async function createList(listName, visibility, characterList) {
   const username = await getUsername();
 
   if (!userId || !username) {
-    redirect('/login');
+    return {
+      error: true,
+      message: 'Not authorized.'
+    };
   }
 
   if (!listName)
@@ -37,7 +40,11 @@ export async function createList(listName, visibility, characterList) {
   res = await dbGet('SELECT id FROM lists WHERE name=?', [listName]);
   const listId = res[0].id;
 
-  redirect('/view/' + listId);
+  return {
+    error: false,
+    message: 'Success',
+    listId: listId
+  };
 }
 
 export async function editExisitingList(listId, listName, visibility, characterList) {
@@ -45,7 +52,10 @@ export async function editExisitingList(listId, listName, visibility, characterL
   const ownerId = (await dbGet('SELECT ownerId FROM lists WHERE id=?', [listId]))[0].ownerId;
 
   if (ownerId != userId)
-    redirect('/not-found');
+    return {
+      error: true,
+      message: 'Not authorized.'
+    };
 
   // List must now exist and the owner == user
 
@@ -72,6 +82,10 @@ export async function editExisitingList(listId, listName, visibility, characterL
   
   await dbGet('UPDATE lists SET name=?, visibility=?, characterList=?, lastUpdated=? WHERE id=?', [listName, visibilityString, characterList.join(''), Math.floor(Date.now()/1000), listId]);
 
-  redirect('/view/' + listId);
+  return {
+    error: false,
+    message: 'Success',
+    listId: listId
+  };
 }
  

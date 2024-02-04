@@ -8,10 +8,10 @@ export async function getListInfoFromId(listId) {
   const userId = await getUserIdFromToken();
 
   if (queryResult.length == 0) {
-    redirect('/not-found');
+    return null;
   }
   else if (queryResult[0].visibility == 'private' && queryResult[0].ownerId != userId) {
-    redirect('/not-found');
+    return null;
   } else {
     queryResult[0].characterList = queryResult[0].characterList.split('');
     return queryResult[0];

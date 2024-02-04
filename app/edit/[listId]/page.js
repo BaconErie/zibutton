@@ -26,7 +26,7 @@ export default function EditListPage({ params }) {
     const userId = await getUserIdFromToken();
     const listInfo = await getListInfoFromId(params.listId);
 
-    if (!userId || userId != listInfo.ownerId) 
+    if (!userId || !listInfo || userId != listInfo.ownerId) 
       redirect('/not-found');
     
     setCharacterList(listInfo.characterList);
@@ -51,6 +51,8 @@ export default function EditListPage({ params }) {
 
     if (res && res.error)
       setErrorMessage(res.message);
+    else (res && !res.error)
+      redirect('/view/' + res.listId);
   }
 
   async function validateCharacter(char) {

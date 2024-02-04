@@ -7,6 +7,7 @@ import styles from '@/lib/ui/auth/auth.module.css';
 import '@/lib/ui/auth/auth.css';
 
 import PrimaryButton from '@/lib/ui/baconerie/PrimaryButton/PrimaryButton';
+import { redirect } from 'next/navigation';
 
 export default function LoginPage() {
   const [errorMessage, setErrorMessage] = useState('');
@@ -23,6 +24,8 @@ export default function LoginPage() {
     
     if (result && result.error) {
       setErrorMessage(result.message);
+    } else if (result && !result.error) {
+      redirect('/lists');
     }
   }
 

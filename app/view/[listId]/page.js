@@ -10,6 +10,7 @@ import styles from './view.module.css';
 import Link from 'next/link';
 import CharacterDisplay from '@/lib/ui/CharacterDisplay/CharacterDisplay';
 import PrimaryButton from "@/lib/ui/baconerie/PrimaryButton/PrimaryButton";
+import { redirect } from "next/navigation";
 
 export default function ViewList({ params }) {
   const [listName, setListName] = useState('');
@@ -25,7 +26,7 @@ export default function ViewList({ params }) {
     const queryResult = await getListInfoFromId(params.listId);
 
     if (!queryResult)
-      return;
+      redirect('/not-found');
 
     setListName(queryResult.name);
     setOwnerId(queryResult.ownerId);
