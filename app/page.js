@@ -17,6 +17,8 @@ export default function IndexPage()
     try {
       jwt.verify(cookie.value, process.env.TOKEN_SECRET).userId;
       // If the jwt does not fail then token is verified
+
+      try {
       redirect('/lists');
     } catch (err){
       if (['JsonWebTokenError', 'TokenExpiredError', 'NotBeforeError'].indexOf(err.name) == -1)
