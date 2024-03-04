@@ -36,7 +36,7 @@ export async function createList(listName, visibility, characterList) {
   const characterListString = characterList.join('');  
 
   await dbGet('INSERT INTO lists (ownerId, ownerUsername, name, timeCreated, lastUpdated, visibility, characterList) VALUES (?, ?, ?, ?, ?, ?, ?)', [userId, username, listName, Math.floor(Date.now()/1000), Math.floor(Date.now()/1000), visibilityString, characterListString]);
-  res = await dbGet('SELECT id FROM lists WHERE name=?', [listName]);
+  res = await dbGet('SELECT id FROM lists WHERE name=? AND ownerId=?', [listName, userId]);
   const listId = res[0].id;
 
   return {
