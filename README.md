@@ -1,47 +1,36 @@
-字Button
-======================================
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-字Button (zibutton) is a web app that helps you study the the stroke order of characters without needing a pen and paper. It displays the definition, pinyin, and a selection of strokes for the character, and then you select the next correct stroke.
+## Getting Started
 
-字Button is available at https://zibutton.baconerie.com. You can create an account to make lists, or you can study public lists without an account (you need to have the link to the public list first)
+First, run the development server:
 
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-Code layout
-======================================
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-This project's layout is similar to other Next.js projects. Here is an overview to some of these files:
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-- `/app` contains source code
-- `/scripts` contains code that sets up the database
-- `/docs` contains documentation about the project; mostly empty
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-- Files at top-most directory has config files for npm, Next.js, etc.
+## Learn More
 
-How to run the app locally
-======================================
+To learn more about Next.js, take a look at the following resources:
 
-*Note: You will need Node.js and npm installed, as well as git if you using that to download the source*
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-1. Download the source code (if you have git, run `git clone https://github.com/BaconErie/zibutton.git`)
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-2. Run `npm install` at the top most directory to install all the dependencies (make sure your NODE_ENV is NOT set to production)
+## Deploy on Vercel
 
-3. Set the DB_PATH and TOKEN_SECRET environment variables
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-4. Run `setup.js` in the scripts folder to setup the database (it will only create the tables in the DB set in DB_PATH if they do not exist)
-
-5. Run `npm run build`, then finally `npm run start`
-
-Technology stack
-======================================
-
-- JavaScript as the language
-- React.js as the UI library for the options page
-- Next.js as the React framework
-- [HanziWriter](https://hanziwriter.org/) as the library that renders the characters
-- SQLite for database
-
-License
-======================================
-
-字Button is licensed under the MIT license. See the [LICENSE file](LICENSE) for details. All dependencies are owned and licensed by their respective owners.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
