@@ -55,6 +55,9 @@ function CharacterDisplay({character, source, settings}: { character: string, so
   const canvasRef = useRef(null);
   const [ strokeStrings, setStrokeStrings ] = useState<string[]>([]);
   
+
+  const [ medians, setMedians ] = useState<any[][]>([]); 
+  
   async function useEffectMain() { 
     let urlToUse = '';
 
@@ -96,6 +99,31 @@ function CharacterDisplay({character, source, settings}: { character: string, so
         {
           // Save the data for the character
           newStrokeStrings = characterObject.strokes;
+
+          let newMedians: any[][] = [];
+          for (const stroke of characterObject.medians) {
+            let mediansForStroke: any[] = [];
+            for (let i=0; i<stroke.length; i++) {
+              const median = stroke[i];
+              let newMedian = [];
+              newMedian.push(median)
+
+              if (i == 0) {
+                newMedian.push(0);
+              } else {
+                // Calculate distance
+                const prevMedianCoord = mediansForStroke[i-1][0];
+                const prevMedianDistance = mediansForStroke[i-1][1];
+                
+                const distanceFromPrevMedian = Math.sqrt((prevMedianCoord[0] - median[0])**2 + (prevMedianCoord[1] - median[1])**2)
+                newMedian.push(prevMedianDistance + distanceFromPrevMedian);
+              }
+
+              mediansForStroke.push(newMedian);
+            }
+            newMedians.push(mediansForStroke);
+          }
+          setMedians(newMedians);
           break;
         }
       }
@@ -108,7 +136,7 @@ function CharacterDisplay({character, source, settings}: { character: string, so
     // Renders the strokes
     
     // Return if first load and the strokeStrings haven't been loaded yet
-    if (strokeStrings.length == 0) return;
+    if (strokeStrings.length == 0 || medians.length == 0) return;
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
@@ -127,6 +155,14 @@ function CharacterDisplay({character, source, settings}: { character: string, so
 
       const strokePath = new Path2D(strokeStrings[strokeId]);
       ctx.fill(strokePath);
+
+      for (const median of medians[strokeId]) {
+        console.log('hello', medians)
+        ctx.beginPath();
+        ctx.arc(median[0][0], median[0][1], 10, 0, 2 * Math.PI);
+        ctx.fillStyle = 'green';
+        ctx.fill();
+      }
     }
   }
 
