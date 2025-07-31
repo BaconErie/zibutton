@@ -1,24 +1,15 @@
 {
   "name": "zibutton",
-  "version": "0.1.0",
   "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start -p 8000",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "bcrypt": "^5.1.1",
-    "hanzi-writer": "^3.6.1",
-    "jsonwebtoken": "^9.0.2",
-    "next": "14.1.0",
-    "react": "^18",
-    "react-dom": "^18",
-    "sqlite3": "^5.1.7"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "devDependencies": {
-    "eslint": "^8",
-    "eslint-config-next": "14.1.0"
+    "typescript": "~5.8.3",
+    "vite": "^7.0.4"
   }
 }
